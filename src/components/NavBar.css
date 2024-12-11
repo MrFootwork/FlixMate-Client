@@ -1,0 +1,11 @@
+.navbar-container {
+	position: sticky;
+	width: 100%;
+	height: 3rem;
+
+	background-color: bisque;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
