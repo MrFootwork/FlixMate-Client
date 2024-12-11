@@ -1,7 +1,7 @@
 .extension-image-container {
 	position: absolute;
 	top: 80%;
-	left: 90%;
+	right: 0;
 
 	background: none;
 	border: none;

@@ -4,7 +4,7 @@ import React from 'react'
 
 function SearchBar() {
 	return (
-		<div>
+		<div className='searchbar-container'>
 			<input
 				type='text'
 				name='movieInput'
