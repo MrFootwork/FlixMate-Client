@@ -13,3 +13,7 @@ const HomePage = () => {
 }
 
 export default HomePage
+
+// ATTRIBUTIONS
+// Extension Icon: <a href="https://www.flaticon.com/free-icons/puzzle" title="puzzle icons">Puzzle icons created by Google - Flaticon</a>
+// Profile Image: <a href="https://www.flaticon.com/free-icons/female" title="female icons">Female icons created by Prosymbols Premium - Flaticon</a>
