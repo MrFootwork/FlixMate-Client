@@ -1,0 +1,18 @@
+.message {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 50px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.good {
+  background-color: rgba(0, 65, 0, 0.8);
+}
+
+.bad {
+  background-color: rgba(170, 0, 0, 0.8);
+}

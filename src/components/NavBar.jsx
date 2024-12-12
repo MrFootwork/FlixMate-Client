@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 
 import SearchBar from './SearchBar'
@@ -8,53 +8,70 @@ import { Sling as Hamburger } from 'hamburger-react'
 
 import logo from '../assets/images/logo.png'
 import './NavBar.css'
+import axios from 'axios'
+import { useContext } from 'react'
+import { MessageContext } from '../contexts/MessageWrapper'
+
+const API_URL = import.meta.env.VITE_API_URL
 
 function NavBar() {
-	const isMobile = useMediaQuery({ query: '(max-width: 800px)' })
+  const isMobile = useMediaQuery({ query: '(max-width: 800px)' })
+  const [isOpen, setOpen] = useState(false)
+  const { setMessage } = useContext(MessageContext)
+  const navigate = useNavigate()
 
-	function createRoom() {
-		console.log('Creating a room...')
-	}
+  function createRoom() {
+    console.log('Creating a room...')
+  }
 
-	const [isOpen, setOpen] = useState(false)
+  async function handleLogOut() {
+    const { data } = await axios.post(
+      API_URL + '/auth/logout',
+      {},
+      { withCredentials: true }
+    )
+    console.log(data)
+    setMessage({ type: 'good', message: 'Succesfully logged out!' })
+    navigate('/')
+  }
 
-	return (
-		<div className='navbar-container'>
-			{/* Mobile NavBar*/}
-			{isMobile && (
-				<>
-					<div className='image-container'>
-						<img src={logo} alt='FlixMate Logo' />
-					</div>
-					<SearchBar />
-					<Hamburger toggled={isOpen} toggle={setOpen} />
-				</>
-			)}
+  return (
+    <div className='navbar-container'>
+      {/* Mobile NavBar*/}
+      {isMobile && (
+        <>
+          <div className='image-container'>
+            <img src={logo} alt='FlixMate Logo' />
+          </div>
+          <SearchBar />
+          <Hamburger toggled={isOpen} toggle={setOpen} />
+        </>
+      )}
 
-			{/* Mobile NavBar Options*/}
-			{isMobile && (
-				<div
-					className={'option-container mobile' + (isOpen ? ' isActive' : '')}
-				>
-					<option>Rooms</option>
-					<option>Profile</option>
-					<option>Log Out</option>
-				</div>
-			)}
+      {/* Mobile NavBar Options*/}
+      {isMobile && (
+        <div
+          className={'option-container mobile' + (isOpen ? ' isActive' : '')}
+        >
+          <option>Rooms</option>
+          <option>Profile</option>
+          <option onClick={handleLogOut}>Log Out</option>
+        </div>
+      )}
 
-			{/* Desktop NavBar*/}
-			{!isMobile && (
-				<>
-					<div className='image-container'>
-						<img src={logo} alt='FlixMate Logo' />
-					</div>
-					<SearchBar />
-					<Link onClick={createRoom}>Rooms</Link>
-					<NavSelectOption />
-				</>
-			)}
-		</div>
-	)
+      {/* Desktop NavBar*/}
+      {!isMobile && (
+        <>
+          <div className='image-container'>
+            <img src={logo} alt='FlixMate Logo' />
+          </div>
+          <SearchBar />
+          <Link onClick={createRoom}>Rooms</Link>
+          <NavSelectOption handleLogOut={handleLogOut} />
+        </>
+      )}
+    </div>
+  )
 }
 
 export default NavBar
