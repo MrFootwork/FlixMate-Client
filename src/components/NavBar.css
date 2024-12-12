@@ -1,43 +1,50 @@
 .navbar-container {
-	position: sticky;
-	width: 100%;
-	height: var(--navbar-height);
+  display: none;
+}
 
-	background-color: bisque;
+.navbar-container.visible {
+  display: block;
+  z-index: var(--z-navbar);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: var(--navbar-height);
 
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  background-color: bisque;
 
-	padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-	.image-container {
-		& img {
-			height: var(--navbar-height);
-		}
-	}
+  padding: 0 1rem;
 
-	.option-container.mobile {
-		display: none;
+  .image-container {
+    & img {
+      height: var(--navbar-height);
+    }
+  }
 
-		&.isActive {
-			display: block;
-			position: absolute;
-			background-color: var(--option-background-color);
-			top: var(--navbar-height);
-			left: 0;
-			width: 100%;
-		}
+  .option-container.mobile {
+    display: none;
 
-		& option {
-			padding: 0.5rem 1rem;
-			cursor: pointer;
+    &.isActive {
+      display: block;
+      position: absolute;
+      background-color: var(--option-background-color);
+      top: var(--navbar-height);
+      left: 0;
+      width: 100%;
+    }
 
-			&:hover {
-				background-color: hsl(
-					from var(--option-background-color) h s calc(l + 3)
-				);
-			}
-		}
-	}
+    & option {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: hsl(
+          from var(--option-background-color) h s calc(l + 3)
+        );
+      }
+    }
+  }
 }

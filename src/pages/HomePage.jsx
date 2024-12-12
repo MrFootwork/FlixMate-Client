@@ -1,12 +1,34 @@
+import { useState, useEffect } from 'react'
+import config from '../../config'
 import ExtensionIndicator from '../components/ExtensionIndicator'
-import NavBar from '../components/NavBar'
 import './HomePage.css'
+import axios from 'axios'
+import MovieListCarousel from '../components/MovieListCarousel'
 
 const HomePage = () => {
+	const [movies, setMovies] = useState({})
+	const storedToken = localStorage.getItem('authToken')
+
+	useEffect(() => {
+		axios
+			.get(config.API_URL + '/movies', {
+				headers: { Authorization: `Bearer ${storedToken}` },
+			})
+			.then(response => {
+				setMovies(response.data)
+			})
+			.catch(err => {
+				console.error(err)
+			})
+	}, [])
+
 	return (
-		<div>
-			<NavBar />
-			HomePage
+		<div className='homepage-container'>
+			{/* <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
+				<code>{JSON.stringify(movies, null, 2)}</code>
+			</pre> */}
+			<h2>Top Picks</h2>
+			{movies && <MovieListCarousel movies={movies} />}
 			<ExtensionIndicator />
 		</div>
 	)

@@ -1,6 +1,12 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import './NavBar.css'
+import logo from '../assets/images/logo.png'
+
+import React, { useState, useContext, useEffect } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
+import axios from 'axios'
+
+import { MessageContext } from '../contexts/MessageWrapper'
 
 import SearchBar from './SearchBar'
 import NavSelectOption from './NavSelectOption'
@@ -14,13 +20,22 @@ import { MessageContext } from '../contexts/MessageWrapper'
 import { AuthContext } from '../contexts/AuthWrapper'
 
 const API_URL = import.meta.env.VITE_API_URL
+const pathBlackList = ['/', '/auth']
 
 function NavBar() {
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' })
   const [isOpen, setOpen] = useState(false)
+  const [onRightPath, setOnRightPath] = useState(false)
   const { setMessage } = useContext(MessageContext)
   const { setUser } = useContext(AuthContext)
   const navigate = useNavigate()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!pathBlackList.includes(location.pathname)) {
+      setOnRightPath(true)
+    }
+  }, [])
 
   function createRoom() {
     console.log('Creating a room...')
@@ -40,7 +55,7 @@ function NavBar() {
   }
 
   return (
-    <div className='navbar-container'>
+    <div className={`navbar-container ${onRightPath ? 'visible' : ''}`}>
       {/* Mobile NavBar*/}
       {isMobile && (
         <>

@@ -1,5 +1,5 @@
 .extension-image-container {
-	position: absolute;
+	position: fixed;
 	top: 80%;
 	right: 0;
 
