@@ -45,6 +45,7 @@ function NavBar() {
     )
     console.log(data)
     setUser(null)
+    window.localStorage.removeItem('flexmateToken')
     document.dispatchEvent(new Event('FlixMateDisconnect'))
     setMessage({ type: 'good', message: 'Succesfully logged out!' })
     navigate('/')

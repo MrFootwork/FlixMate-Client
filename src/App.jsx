@@ -28,7 +28,6 @@ function App() {
     console.log('Token from app load: ', token)
     axios
       .get(API_URL + '/users/me', {
-        withCredentials: true,
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem(
             'flixmateToken'
