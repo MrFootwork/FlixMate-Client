@@ -28,8 +28,10 @@ function NavBar() {
   useEffect(() => {
     if (!pathBlackList.includes(location.pathname)) {
       setOnRightPath(true)
+    } else {
+      setOnRightPath(false)
     }
-  }, [])
+  }, [location])
 
   function createRoom() {
     console.log('Creating a room...')
