@@ -13,7 +13,7 @@ const HomePage = () => {
 
   useEffect(() => {
     axios
-      .get(config.API_URL + '/movies', {
+      .get(config.API_URL + '/movies/top-picks', {
         withCredentials: true,
         headers: { Authorization: `Bearer ${token}` },
       })

@@ -78,7 +78,9 @@ function NavBar() {
           }
           onClick={() => setMobileMenu(!mobileMenuIsOpen)}
         >
-          <li>Rooms</li>
+          <li>
+            <Link to='/rooms'>Rooms</Link>
+          </li>
           <li>
             <Link to={'/profile'}>Profile</Link>
           </li>
