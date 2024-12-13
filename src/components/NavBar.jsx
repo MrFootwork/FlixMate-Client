@@ -7,17 +7,11 @@ import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 
 import { MessageContext } from '../contexts/MessageWrapper'
+import { AuthContext } from '../contexts/AuthWrapper'
 
 import SearchBar from './SearchBar'
 import NavSelectOption from './NavSelectOption'
 import { Sling as Hamburger } from 'hamburger-react'
-
-import logo from '../assets/images/logo.png'
-import './NavBar.css'
-import axios from 'axios'
-import { useContext } from 'react'
-import { MessageContext } from '../contexts/MessageWrapper'
-import { AuthContext } from '../contexts/AuthWrapper'
 
 const API_URL = import.meta.env.VITE_API_URL
 const pathBlackList = ['/', '/auth']
