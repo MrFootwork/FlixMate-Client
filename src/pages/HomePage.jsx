@@ -4,14 +4,18 @@ import ExtensionIndicator from '../components/ExtensionIndicator'
 import './HomePage.css'
 import axios from 'axios'
 import MovieListCarousel from '../components/MovieListCarousel'
+import { useContext } from 'react'
+import { AuthContext } from '../contexts/AuthWrapper'
 
 const HomePage = () => {
   const [movies, setMovies] = useState({})
-  const storedToken = localStorage.getItem('authToken')
+  const { token } = useContext(AuthContext)
 
   useEffect(() => {
     axios
-      .get(config.API_URL + '/movies', { withCredentials: true })
+      .get(config.API_URL + '/movies', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(response => {
         setMovies(response.data)
       })
