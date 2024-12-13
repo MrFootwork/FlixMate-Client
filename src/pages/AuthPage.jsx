@@ -4,12 +4,14 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useContext } from 'react'
 import { MessageContext } from '../contexts/MessageWrapper'
+import { AuthContext } from '../contexts/AuthWrapper'
 
 const API_URL = import.meta.env.VITE_API_URL
 
 const AuthPage = () => {
   const [formState, setFormState] = useState('login')
-  const { message, setMessage } = useContext(MessageContext)
+  const { setMessage } = useContext(MessageContext)
+  const { setUser } = useContext(AuthContext)
   const navigate = useNavigate()
 
   function handleInvertFormState() {
@@ -28,6 +30,10 @@ const AuthPage = () => {
       }
     )
     console.log(data)
+    setUser(data)
+    const connectEvent = new CustomEvent('FlixMateConnect', { detail: data })
+    // connectEvent.target.jwt = data
+    document.dispatchEvent(connectEvent)
     setMessage({
       type: 'good',
       message: 'Succesfully logged in!',

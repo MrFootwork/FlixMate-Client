@@ -11,6 +11,7 @@ import './NavBar.css'
 import axios from 'axios'
 import { useContext } from 'react'
 import { MessageContext } from '../contexts/MessageWrapper'
+import { AuthContext } from '../contexts/AuthWrapper'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -18,6 +19,7 @@ function NavBar() {
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' })
   const [isOpen, setOpen] = useState(false)
   const { setMessage } = useContext(MessageContext)
+  const { setUser } = useContext(AuthContext)
   const navigate = useNavigate()
 
   function createRoom() {
@@ -31,6 +33,8 @@ function NavBar() {
       { withCredentials: true }
     )
     console.log(data)
+    setUser(null)
+    document.dispatchEvent(new Event('FlixMateDisconnect'))
     setMessage({ type: 'good', message: 'Succesfully logged out!' })
     navigate('/')
   }
