@@ -1,0 +1,14 @@
+.landingpage {
+  & > * {
+    padding: 1rem;
+  }
+  & .button {
+    border: none;
+    background-color: bisque;
+    border-radius: 5px;
+
+    padding: 0.4rem 1rem;
+    color: var(--font-color);
+    text-decoration: none;
+  }
+}
