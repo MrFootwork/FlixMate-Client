@@ -21,14 +21,21 @@ const AuthPage = () => {
   }
 
   async function logIn(e) {
-    const { data } = await axios.post(API_URL + '/auth/login', {
-      email: e.target.email.value,
-      password: e.target.password.value,
-    })
+    const { data } = await axios.post(
+      API_URL + '/auth/login',
+      {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      },
+      {
+        withCredentials: true,
+      }
+    )
     console.log(data)
     setToken(data.jwt)
     window.localStorage.setItem('flixmateToken', data.jwt)
     const response = await axios.get(API_URL + '/users/me', {
+      withCredentials: true,
       headers: {
         Authorization: `Bearer ${data.jwt}`,
       },
@@ -53,11 +60,15 @@ const AuthPage = () => {
       })
       return
     }
-    const { data } = await axios.post(API_URL + '/auth/signup', {
-      email: e.target.email.value,
-      name: e.target.elements.name.value,
-      password: e.target.password.value,
-    })
+    const { data } = await axios.post(
+      API_URL + '/auth/signup',
+      {
+        email: e.target.email.value,
+        name: e.target.elements.name.value,
+        password: e.target.password.value,
+      },
+      { withCredentials: true }
+    )
     console.log(data)
     setMessage({ type: 'good', message: 'Succesfully created an account!' })
     setFormState('login')

@@ -14,6 +14,7 @@ const HomePage = () => {
   useEffect(() => {
     axios
       .get(config.API_URL + '/movies', {
+        withCredentials: true,
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(response => {
