@@ -4,7 +4,8 @@ import RoomCreation from './RoomCreation'
 import { useState } from 'react'
 
 function MovieListCarousel({ movies }) {
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState(false)
+
   if (!Array.isArray(movies)) {
     return <div>Loading...</div>
   }
@@ -26,6 +27,7 @@ function MovieListCarousel({ movies }) {
             <img src={movie.img} alt={movie.title} />
           </button>
         ))}
+
       <ReactModal
         isOpen={selected}
         shouldCloseOnEsc={true}

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useContext } from 'react'
 import { MessageContext } from '../contexts/MessageWrapper'
 import { AuthContext } from '../contexts/AuthWrapper'
+import { useEffect } from 'react'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -14,7 +15,9 @@ const AuthPage = () => {
   const { user, setUser, token, setToken } = useContext(AuthContext)
   const navigate = useNavigate()
 
-  if (user) navigate('/browse')
+  useEffect(() => {
+    if (user) navigate('/browse')
+  }, [user])
 
   function handleInvertFormState() {
     formState === 'login' ? setFormState('signin') : setFormState('login')

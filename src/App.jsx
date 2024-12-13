@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     setToken(window.localStorage.getItem('flixmateToken'))
-    console.log('Token from app load: ', token)
+
     axios
       .get(API_URL + '/users/me', {
         headers: {
@@ -37,9 +37,9 @@ function App() {
         },
       })
       .then(({ data }) => {
-        console.log(data)
         setUser(data)
       })
+      .catch(error => console.error(error))
   }, [])
 
   return (

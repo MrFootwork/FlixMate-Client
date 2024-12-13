@@ -27,9 +27,6 @@ const HomePage = () => {
 
   return (
     <div className='homepage-container'>
-      {/* <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
-				<code>{JSON.stringify(movies, null, 2)}</code>
-			</pre> */}
       <h2>Top Picks</h2>
       {movies && <MovieListCarousel movies={movies} />}
       <ExtensionIndicator />

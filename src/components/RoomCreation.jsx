@@ -7,7 +7,6 @@ const API_URL = import.meta.env.VITE_API_URL
 
 const RoomCreation = ({ movie }) => {
   const { token } = useContext(AuthContext)
-  console.log(movie)
 
   async function handleRoomCreation(e) {
     e.preventDefault()
@@ -26,10 +25,8 @@ const RoomCreation = ({ movie }) => {
         },
       }
     )
-    console.log(data)
     const roomLink = `https://netflix.com/watch/${data.movie.id}?flixmate=${data._id}`
     window.location.href = roomLink
-    // console.log(roomLink)
   }
 
   return (

@@ -1,9 +1,18 @@
 import './Message.css'
 import { useContext } from 'react'
 import { MessageContext } from '../contexts/MessageWrapper'
+import { useEffect } from 'react'
 
 const Message = () => {
-  const { message } = useContext(MessageContext)
+  const { message, setMessage } = useContext(MessageContext)
+
+  // Reset message after a while
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMessage(prev => ({ ...prev, message: '' }))
+      clearTimeout(timer)
+    }, 5000)
+  }, [message.message])
 
   return (
     <>

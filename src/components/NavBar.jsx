@@ -37,7 +37,7 @@ function NavBar() {
     console.log('Creating a room...')
   }
 
-  // FIXME use logout function from AuthContext instead
+  // TODO use logout function from AuthContext instead
   async function handleLogOut() {
     const { data } = await axios.post(
       API_URL + '/auth/logout',
@@ -59,16 +59,26 @@ function NavBar() {
 
   return (
     <div className={`navbar-container ${onPathWithNav ? 'visible' : ''}`}>
-      {/* Mobile NavBar*/}
-      {isMobile && (
-        <>
-          <div className='image-container'>
-            <img src={logo} alt='FlixMate Logo' />
-          </div>
-          <SearchBar />
+      {/* Navbar */}
+      <>
+        <Link to={'/browse'} className='image-container'>
+          <img src={logo} alt='FlixMate Logo' />
+        </Link>
+        <SearchBar />
+
+        {/* Mobile */}
+        {isMobile && (
           <Hamburger toggled={mobileMenuIsOpen} toggle={setMobileMenu} />
-        </>
-      )}
+        )}
+
+        {/* Desktop */}
+        {!isMobile && (
+          <>
+            <Link onClick={createRoom}>Rooms</Link>
+            <NavSelectOption handleLogOut={handleLogOut} />
+          </>
+        )}
+      </>
 
       {/* Mobile NavBar Options*/}
       {isMobile && (
@@ -86,18 +96,6 @@ function NavBar() {
           </li>
           <li onClick={handleLogOut}>Log Out</li>
         </ul>
-      )}
-
-      {/* Desktop NavBar*/}
-      {!isMobile && (
-        <>
-          <div className='image-container'>
-            <img src={logo} alt='FlixMate Logo' />
-          </div>
-          <SearchBar />
-          <Link onClick={createRoom}>Rooms</Link>
-          <NavSelectOption handleLogOut={handleLogOut} />
-        </>
       )}
     </div>
   )

@@ -1,21 +1,21 @@
 import './LandingPage.css'
 import { useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { AuthContext } from '../contexts/AuthWrapper'
 import { useState } from 'react'
 
-const deafultLinkContent = { path: '/auth', caption: 'Login' }
-
 const LandingPage = () => {
   const { user } = useContext(AuthContext)
-  const navigate = useNavigate()
 
-  const [linkContent, setLinkContent] = useState(deafultLinkContent)
+  const [linkContent, setLinkContent] = useState({
+    path: '/auth',
+    caption: 'Login',
+  })
 
   useEffect(() => {
     if (user) setLinkContent({ path: '/browse', caption: 'Enter FlixMate' })
-    if (!user) setLinkContent(deafultLinkContent)
+    if (!user) setLinkContent({ path: '/auth', caption: 'Login' })
   }, [user])
 
   return (
