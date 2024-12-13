@@ -1,33 +1,39 @@
 .select-container {
-	& .profile-button {
-		border: none;
-		background: none;
+  & .profile-button {
+    border: none;
+    background: none;
 
-		& > img {
-			width: 2.5rem;
-			aspect-ratio: 1;
-		}
-	}
+    & > img {
+      width: 2.5rem;
+      aspect-ratio: 1;
+    }
+  }
 
-	& .options-container {
-		position: absolute;
-		top: 3rem;
-		right: 1rem;
+  & .options-container {
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
 
-		display: flex;
-		flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-		background-color: var(--option-background-color);
+    background-color: var(--option-background-color);
+    list-style: none;
 
-		& option {
-			padding: 0.5rem 1rem;
-			cursor: pointer;
+    & li {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
 
-			&:hover {
-				background-color: hsl(
-					from var(--option-background-color) h s calc(l + 3)
-				);
-			}
-		}
-	}
+      &:hover {
+        background-color: hsl(
+          from var(--option-background-color) h s calc(l + 3)
+        );
+      }
+
+      & a {
+        text-decoration: none;
+        color: var(--font-color);
+      }
+    }
+  }
 }

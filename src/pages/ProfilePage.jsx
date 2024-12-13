@@ -1,7 +1,7 @@
-import './AuthPage.css'
+import './ProfilePage.css'
 
-const AuthPage = () => {
-	return <div>AuthPage</div>
+const ProfilePage = () => {
+  return <div>ProfilePage</div>
 }
 
-export default AuthPage
+export default ProfilePage

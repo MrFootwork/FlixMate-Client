@@ -26,6 +26,7 @@
 
   .option-container.mobile {
     display: none;
+    list-style: none;
 
     &.isActive {
       display: block;
@@ -36,7 +37,7 @@
       width: 100%;
     }
 
-    & option {
+    & li {
       padding: 0.5rem 1rem;
       cursor: pointer;
 
@@ -44,6 +45,13 @@
         background-color: hsl(
           from var(--option-background-color) h s calc(l + 3)
         );
+      }
+
+      & a {
+        display: block;
+        width: 100%;
+        text-decoration: none;
+        color: var(--font-color);
       }
     }
   }

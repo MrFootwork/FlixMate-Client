@@ -14,29 +14,30 @@ import NavSelectOption from './NavSelectOption'
 import { Sling as Hamburger } from 'hamburger-react'
 
 const API_URL = import.meta.env.VITE_API_URL
-const pathBlackList = ['/', '/auth']
+const pathsWithoutNav = ['/', '/auth']
 
 function NavBar() {
-  const isMobile = useMediaQuery({ query: '(max-width: 800px)' })
-  const [isOpen, setOpen] = useState(false)
-  const [onRightPath, setOnRightPath] = useState(false)
-  const { setMessage } = useContext(MessageContext)
-  const { setUser } = useContext(AuthContext)
   const navigate = useNavigate()
   const location = useLocation()
+  const isMobile = useMediaQuery({ query: '(max-width: 800px)' })
+  const [mobileMenuIsOpen, setMobileMenu] = useState(false)
+  const [onPathWithNav, setOnPathWithNav] = useState(false)
+
+  const { setMessage } = useContext(MessageContext)
+  const { setUser } = useContext(AuthContext)
 
   useEffect(() => {
-    if (!pathBlackList.includes(location.pathname)) {
-      setOnRightPath(true)
-    } else {
-      setOnRightPath(false)
-    }
+    const onWhiteListedPath = !pathsWithoutNav.includes(location.pathname)
+
+    if (onWhiteListedPath) setOnPathWithNav(true)
+    if (!onWhiteListedPath) setOnPathWithNav(false)
   }, [location])
 
   function createRoom() {
     console.log('Creating a room...')
   }
 
+  // FIXME use logout function from AuthContext instead
   async function handleLogOut() {
     const { data } = await axios.post(
       API_URL + '/auth/logout',
@@ -44,15 +45,20 @@ function NavBar() {
       { withCredentials: true }
     )
     console.log(data)
+
+    // Logout
     setUser(null)
     window.localStorage.removeItem('flixmateToken')
+
+    // Notify extension about Logout
     document.dispatchEvent(new Event('FlixMateDisconnect'))
+
     setMessage({ type: 'good', message: 'Succesfully logged out!' })
     navigate('/')
   }
 
   return (
-    <div className={`navbar-container ${onRightPath ? 'visible' : ''}`}>
+    <div className={`navbar-container ${onPathWithNav ? 'visible' : ''}`}>
       {/* Mobile NavBar*/}
       {isMobile && (
         <>
@@ -60,19 +66,24 @@ function NavBar() {
             <img src={logo} alt='FlixMate Logo' />
           </div>
           <SearchBar />
-          <Hamburger toggled={isOpen} toggle={setOpen} />
+          <Hamburger toggled={mobileMenuIsOpen} toggle={setMobileMenu} />
         </>
       )}
 
       {/* Mobile NavBar Options*/}
       {isMobile && (
-        <div
-          className={'option-container mobile' + (isOpen ? ' isActive' : '')}
+        <ul
+          className={
+            'option-container mobile' + (mobileMenuIsOpen ? ' isActive' : '')
+          }
+          onClick={() => setMobileMenu(!mobileMenuIsOpen)}
         >
-          <option>Rooms</option>
-          <option>Profile</option>
-          <option onClick={handleLogOut}>Log Out</option>
-        </div>
+          <li>Rooms</li>
+          <li>
+            <Link to={'/profile'}>Profile</Link>
+          </li>
+          <li onClick={handleLogOut}>Log Out</li>
+        </ul>
       )}
 
       {/* Desktop NavBar*/}
