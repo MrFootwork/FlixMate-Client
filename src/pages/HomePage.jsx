@@ -6,32 +6,30 @@ import axios from 'axios'
 import MovieListCarousel from '../components/MovieListCarousel'
 
 const HomePage = () => {
-	const [movies, setMovies] = useState({})
-	const storedToken = localStorage.getItem('authToken')
+  const [movies, setMovies] = useState({})
+  const storedToken = localStorage.getItem('authToken')
 
-	useEffect(() => {
-		axios
-			.get(config.API_URL + '/movies', {
-				headers: { Authorization: `Bearer ${storedToken}` },
-			})
-			.then(response => {
-				setMovies(response.data)
-			})
-			.catch(err => {
-				console.error(err)
-			})
-	}, [])
+  useEffect(() => {
+    axios
+      .get(config.API_URL + '/movies', { withCredentials: true })
+      .then(response => {
+        setMovies(response.data)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }, [])
 
-	return (
-		<div className='homepage-container'>
-			{/* <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
+  return (
+    <div className='homepage-container'>
+      {/* <pre style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
 				<code>{JSON.stringify(movies, null, 2)}</code>
 			</pre> */}
-			<h2>Top Picks</h2>
-			{movies && <MovieListCarousel movies={movies} />}
-			<ExtensionIndicator />
-		</div>
-	)
+      <h2>Top Picks</h2>
+      {movies && <MovieListCarousel movies={movies} />}
+      <ExtensionIndicator />
+    </div>
+  )
 }
 
 export default HomePage
