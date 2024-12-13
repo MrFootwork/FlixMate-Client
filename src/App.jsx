@@ -1,5 +1,6 @@
 import './App.css'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, data } from 'react-router-dom'
+import axios from 'axios'
 import LandingPage from './pages/LandingPage'
 import AuthPage from './pages/AuthPage'
 import HomePage from './pages/HomePage'
@@ -9,14 +10,35 @@ import { useContext, useEffect } from 'react'
 import { MessageContext } from './contexts/MessageWrapper'
 import NavBar from './components/NavBar'
 import ProtectedRoutes from './utils/ProtectedRoutes'
+import { AuthContext } from './contexts/AuthWrapper'
+
+const API_URL = import.meta.env.VITE_API_URL
 
 function App() {
   const location = useLocation()
   const { setMessage } = useContext(MessageContext)
+  const { setUser, token, setToken } = useContext(AuthContext)
 
   useEffect(() => {
     setTimeout(_ => setMessage({ type: 'good', message: '' }), 1000)
   }, [location])
+
+  useEffect(() => {
+    setToken(window.localStorage.getItem('flixmateToken'))
+    console.log('Token from app load: ', token)
+    axios
+      .get(API_URL + '/users/me', {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem(
+            'flixmateToken'
+          )}`,
+        },
+      })
+      .then(({ data }) => {
+        console.log(data)
+        setUser(data)
+      })
+  }, [])
 
   return (
     <>

@@ -11,26 +11,30 @@ const API_URL = import.meta.env.VITE_API_URL
 const AuthPage = () => {
   const [formState, setFormState] = useState('login')
   const { setMessage } = useContext(MessageContext)
-  const { setUser } = useContext(AuthContext)
+  const { user, setUser, token, setToken } = useContext(AuthContext)
   const navigate = useNavigate()
+
+  if (user) navigate('/browse')
 
   function handleInvertFormState() {
     formState === 'login' ? setFormState('signin') : setFormState('login')
   }
 
   async function logIn(e) {
-    const { data } = await axios.post(
-      API_URL + '/auth/login',
-      {
-        email: e.target.email.value,
-        password: e.target.password.value,
-      },
-      {
-        withCredentials: true,
-      }
-    )
+    const { data } = await axios.post(API_URL + '/auth/login', {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    })
     console.log(data)
-    setUser(data)
+    setToken(data.jwt)
+    window.localStorage.setItem('flixmateToken', data.jwt)
+    const response = await axios.get(API_URL + '/users/me', {
+      headers: {
+        Authorization: `Bearer ${data.jwt}`,
+      },
+    })
+    console.log('User Client data: ', response.data)
+    setUser(response.data)
     const connectEvent = new CustomEvent('FlixMateConnect', { detail: data })
     // connectEvent.target.jwt = data
     document.dispatchEvent(connectEvent)
@@ -49,17 +53,11 @@ const AuthPage = () => {
       })
       return
     }
-    const { data } = await axios.post(
-      API_URL + '/auth/signup',
-      {
-        email: e.target.email.value,
-        name: e.target.elements.name.value,
-        password: e.target.password.value,
-      },
-      {
-        withCredentials: true,
-      }
-    )
+    const { data } = await axios.post(API_URL + '/auth/signup', {
+      email: e.target.email.value,
+      name: e.target.elements.name.value,
+      password: e.target.password.value,
+    })
     console.log(data)
     setMessage({ type: 'good', message: 'Succesfully created an account!' })
     setFormState('login')
