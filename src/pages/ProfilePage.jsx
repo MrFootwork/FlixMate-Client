@@ -115,7 +115,7 @@ const ProfilePage = () => {
         withCredentials: true,
         headers: { Authorization: `Bearer ${token}` },
       })
-      console.assert(response.statusText === 'OK', response)
+      console.assert(response.status === 200, response)
 
       const newToken = response.data.jwt
 
@@ -131,7 +131,7 @@ const ProfilePage = () => {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       })
-      console.assert(response.statusText === 'OK', response)
+      console.assert(response.status === 200, response)
 
       return response
     } catch (error) {
@@ -146,7 +146,7 @@ const ProfilePage = () => {
         inputUser,
         { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
       )
-      console.assert(response.statusText === 'OK', response)
+      console.assert(response.status === 200, response)
 
       return response.data
     } catch (error) {
