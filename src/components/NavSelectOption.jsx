@@ -1,7 +1,7 @@
 import './NavSelectOption.css'
 import profileIcon from '../assets/images/profile.png'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function NavSelectOption({ handleLogOut }) {
   const [optionsAreVisible, setoptionsAreVisible] = useState(false)
@@ -24,9 +24,13 @@ function NavSelectOption({ handleLogOut }) {
           }}
         >
           <li>
-            <Link to={'/profile'}>Profile</Link>
+            <NavLink to='/profile'>Profile</NavLink>
           </li>
-          <li onClick={handleLogOut}>Log Out</li>
+          <li>
+            <NavLink to='/auth' onClick={handleLogOut}>
+              Log Out
+            </NavLink>
+          </li>
         </ul>
       )}
     </div>

@@ -1,23 +1,24 @@
 import './NavBar.css'
 import logo from '../assets/images/logo.png'
 
-import React, { useState, useContext, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
+import React, { useState, useContext, useEffect } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useMediaQuery } from 'react-responsive'
+import { Sling as Hamburger } from 'hamburger-react'
+
+import config from '../../config'
 
 import { MessageContext } from '../contexts/MessageWrapper'
 import { AuthContext } from '../contexts/AuthWrapper'
 
 import SearchBar from './SearchBar'
 import NavSelectOption from './NavSelectOption'
-import { Sling as Hamburger } from 'hamburger-react'
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = config.API_URL
 const pathsWithoutNav = ['/', '/auth']
 
 function NavBar() {
-  const navigate = useNavigate()
   const location = useLocation()
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' })
   const [mobileMenuIsOpen, setMobileMenu] = useState(false)
@@ -32,10 +33,6 @@ function NavBar() {
     if (onWhiteListedPath) setOnPathWithNav(true)
     if (!onWhiteListedPath) setOnPathWithNav(false)
   }, [location])
-
-  function createRoom() {
-    console.log('Creating a room...')
-  }
 
   // TODO use logout function from AuthContext instead
   async function handleLogOut() {
@@ -54,14 +51,13 @@ function NavBar() {
     document.dispatchEvent(new Event('FlixMateDisconnect'))
 
     setMessage({ type: 'good', message: 'Succesfully logged out!' })
-    navigate('/')
   }
 
   return (
     <div className={`navbar-container ${onPathWithNav ? 'visible' : ''}`}>
       {/* Navbar */}
       <>
-        <Link to={'/browse'} className='image-container'>
+        <Link to='/browse' className='image-container'>
           <img src={logo} alt='FlixMate Logo' />
         </Link>
         <SearchBar />
@@ -74,7 +70,8 @@ function NavBar() {
         {/* Desktop */}
         {!isMobile && (
           <>
-            <Link onClick={createRoom}>Rooms</Link>
+            <NavLink to='/browse'>Movies</NavLink>
+            <NavLink to='/rooms'>Rooms</NavLink>
             <NavSelectOption handleLogOut={handleLogOut} />
           </>
         )}
@@ -89,12 +86,19 @@ function NavBar() {
           onClick={() => setMobileMenu(!mobileMenuIsOpen)}
         >
           <li>
-            <Link to='/rooms'>Rooms</Link>
+            <NavLink to='/browse'>Movies</NavLink>
           </li>
           <li>
-            <Link to={'/profile'}>Profile</Link>
+            <NavLink to='/rooms'>Rooms</NavLink>
           </li>
-          <li onClick={handleLogOut}>Log Out</li>
+          <li>
+            <NavLink to='/profile'>Profile</NavLink>
+          </li>
+          <li>
+            <NavLink to='/auth' onClick={handleLogOut}>
+              Log Out
+            </NavLink>
+          </li>
         </ul>
       )}
     </div>

@@ -1,4 +1,6 @@
 .select-container {
+  flex: 1 0 0;
+
   & .profile-button {
     border: none;
     background: none;
