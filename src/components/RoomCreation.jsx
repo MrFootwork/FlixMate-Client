@@ -2,11 +2,14 @@ import { useContext } from 'react'
 import './RoomCreation.css'
 import axios from 'axios'
 import { AuthContext } from '../contexts/AuthWrapper'
+import { useNavigate } from 'react-router-dom'
 
 const API_URL = import.meta.env.VITE_API_URL
 
 const RoomCreation = ({ movie }) => {
   const { token } = useContext(AuthContext)
+
+  const navigate = useNavigate()
 
   async function handleRoomCreation(e) {
     e.preventDefault()
@@ -26,7 +29,8 @@ const RoomCreation = ({ movie }) => {
       }
     )
     const roomLink = `https://netflix.com/watch/${data.movie.id}?flixmate=${data._id}`
-    window.location.href = roomLink
+    window.open(roomLink, '_blank', 'noopener,noreferrer')
+    navigate('/rooms')
   }
 
   return (
