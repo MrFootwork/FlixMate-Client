@@ -29,7 +29,7 @@ function MovieListCarousel({ movies }) {
         ))}
 
       <ReactModal
-        isOpen={selected}
+        isOpen={Boolean(selected)}
         shouldCloseOnEsc={true}
         onRequestClose={() => setSelected(null)}
         style={{
