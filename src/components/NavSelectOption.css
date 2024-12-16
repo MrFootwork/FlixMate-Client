@@ -5,6 +5,8 @@
     border: none;
     background: none;
 
+    display: flex;
+
     & > img {
       width: 2.5rem;
       aspect-ratio: 1;
@@ -15,7 +17,6 @@
     position: absolute;
     top: 3rem;
     right: 1rem;
-    outline: 1px solid red;
 
     display: flex;
     flex-direction: column;

@@ -11,9 +11,11 @@ import config from '../../config'
 
 import { MessageContext } from '../contexts/MessageWrapper'
 import { AuthContext } from '../contexts/AuthWrapper'
+import { ThemeContext } from '../contexts/ThemeWrapper'
 
 import SearchBar from './SearchBar'
 import NavSelectOption from './NavSelectOption'
+import { DarkModeSwitch } from 'react-toggle-dark-mode'
 
 const API_URL = config.API_URL
 const pathsWithoutNav = ['/', '/auth']
@@ -53,6 +55,19 @@ function NavBar() {
     setMessage({ type: 'good', message: 'Succesfully logged out!' })
   }
 
+  // Theme Toggler
+  const { theme, toggleTheme } = useContext(ThemeContext)
+  const [isDarkMode, setDarkMode] = React.useState(false)
+
+  useEffect(() => {
+    setDarkMode(theme === 'dark')
+  }, [theme])
+
+  const toggleDarkMode = checked => {
+    setDarkMode(checked)
+    toggleTheme()
+  }
+
   return (
     <div className={`navbar-container ${onPathWithNav ? 'visible' : ''}`}>
       {/* Navbar */}
@@ -64,7 +79,15 @@ function NavBar() {
 
         {/* Mobile */}
         {isMobile && (
-          <Hamburger toggled={mobileMenuIsOpen} toggle={setMobileMenu} />
+          <>
+            <DarkModeSwitch
+              // style={{ marginBottom: '2rem' }}
+              checked={isDarkMode}
+              onChange={toggleDarkMode}
+              size={'2rem'}
+            />
+            <Hamburger toggled={mobileMenuIsOpen} toggle={setMobileMenu} />
+          </>
         )}
 
         {/* Desktop */}
@@ -72,6 +95,12 @@ function NavBar() {
           <>
             <NavLink to='/browse'>Movies</NavLink>
             <NavLink to='/rooms'>Rooms</NavLink>
+            <DarkModeSwitch
+              // style={{ marginBottom: '2rem' }}
+              checked={isDarkMode}
+              onChange={toggleDarkMode}
+              size={'2rem'}
+            />
             <NavSelectOption handleLogOut={handleLogOut} />
           </>
         )}
