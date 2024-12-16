@@ -15,11 +15,12 @@
     position: absolute;
     top: 3rem;
     right: 1rem;
+    outline: 1px solid red;
 
     display: flex;
     flex-direction: column;
 
-    background-color: var(--option-background-color);
+    background-color: var(--color-background-secondary);
     list-style: none;
 
     & li {
@@ -28,13 +29,13 @@
 
       &:hover {
         background-color: hsl(
-          from var(--option-background-color) h s calc(l + 3)
+          from var(--color-background-secondary) h s calc(l + 3)
         );
       }
 
       & a {
         text-decoration: none;
-        color: var(--font-color);
+        color: var(--color-text-light);
       }
     }
   }

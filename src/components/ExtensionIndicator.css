@@ -1,16 +1,16 @@
 .extension-image-container {
-	position: fixed;
-	top: 80%;
-	right: 0;
+  position: fixed;
+  top: 80%;
+  right: 0;
 
-	background: none;
-	border: none;
+  background: none;
+  border: none;
 
-	width: 4rem;
-	aspect-ratio: 1;
-	border-radius: 50%;
+  width: 4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
 
-	&:hover {
-		background-color: aquamarine;
-	}
+  &:hover {
+    background-color: var(--color-highlight);
+  }
 }

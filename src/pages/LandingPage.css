@@ -4,11 +4,17 @@
   }
   & .button {
     border: none;
-    background-color: bisque;
+    background-color: var(--color-background-secondary);
     border-radius: 5px;
 
     padding: 0.4rem 1rem;
-    color: var(--font-color);
+    color: var(--color-text-light);
     text-decoration: none;
+
+    &:hover {
+      background-color: hsl(
+        from var(--color-background-secondary) h s calc(l + 3)
+      );
+    }
   }
 }

@@ -6,7 +6,8 @@
   align-items: center;
 
   .formContainer {
-    border: 1px solid black;
+    border: 1px solid var(--color-neutral);
+    background-color: var(--color-background-off);
     width: 95%;
     max-width: 400px;
     border-radius: 5px;
@@ -23,6 +24,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
+
     gap: 20px;
     width: 100%;
 
@@ -35,12 +37,26 @@
     input {
       width: 100%;
     }
+
+    input[type='submit'] {
+      border: 1px solid var(--color-neutral);
+      border-radius: 2px;
+      padding: 0.2rem;
+      background-color: var(--color-background-secondary);
+      color: var(--color-text-light);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--color-background-secondary-off);
+      }
+    }
   }
 
   button {
     width: 100%;
     border: none;
     background-color: inherit;
+    color: inherit;
 
     b {
       text-decoration: underline;
