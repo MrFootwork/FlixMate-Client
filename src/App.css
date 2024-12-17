@@ -83,6 +83,12 @@
   --shadow-l: 2px 2px 7px -6px var(--color-black);
 }
 
+/* FIXME  */
+/* ::selection { */
+/* background: #ffb7b7; Light red background */
+/* color: #000000;      Black text */
+/* } */
+
 body {
   background-color: var(--color-background);
   color: var(--color-text);

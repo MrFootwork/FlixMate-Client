@@ -14,7 +14,7 @@ function MovieListCarousel({ movies }) {
     console.log('creating Room for ' + movie.title)
     setSelected(movie)
   }
-
+  // FIXME Build a real carousel
   return (
     <div className='carousel-component'>
       {movies &&

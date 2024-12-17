@@ -9,6 +9,7 @@
   align-items: stretch;
   gap: 2px;
 
+  /* FIXME make better round corners */
   & .list-header-row {
     display: flex;
     flex-direction: row;
