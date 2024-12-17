@@ -11,7 +11,7 @@
   height: var(--navbar-height);
 
   background-color: var(--color-background-secondary);
-  color: var(--color-text-light);
+  color: var(--color-light);
 
   display: flex;
   justify-content: space-between;
@@ -34,7 +34,7 @@
     text-align: center;
 
     text-decoration: none;
-    color: var(--color-text-light);
+    color: var(--color-light);
   }
 
   .option-container.mobile {

@@ -28,7 +28,7 @@
     border-top: 2px solid var(--color-background);
     margin-top: 1rem;
     background-color: var(--color-background-secondary);
-    color: var(--color-text-light);
+    color: var(--color-light);
 
     th {
       text-align: center;

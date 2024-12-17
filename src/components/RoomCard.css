@@ -39,7 +39,7 @@
 
   button {
     background-color: var(--color-background-secondary);
-    color: var(--color-text-light);
+    color: var(--color-light);
     box-shadow: var(--shadow-s);
 
     border: none;

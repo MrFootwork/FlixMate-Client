@@ -3,7 +3,7 @@
   bottom: 0;
   width: 100vw;
   height: 50px;
-  color: var(--color-text-dark);
+  color: var(--color-dark);
   display: flex;
   align-items: center;
   justify-content: center;
