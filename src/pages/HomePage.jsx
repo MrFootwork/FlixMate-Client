@@ -38,6 +38,7 @@ const HomePage = () => {
       )}
       <h2>Top Picks</h2>
       {movies && <MovieListCarousel movies={movies} />}
+      {/* FIXME move this to app */}
       <ExtensionIndicator />
     </div>
   )

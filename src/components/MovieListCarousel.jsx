@@ -15,6 +15,7 @@ function MovieListCarousel({ movies }) {
     setSelected(movie)
   }
   // FIXME Build a real carousel
+  // FIXME add loading spinner
   return (
     <div className='carousel-component'>
       {movies &&

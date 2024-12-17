@@ -83,7 +83,7 @@
   --shadow-l: 2px 2px 7px -6px var(--color-black);
 }
 
-/* FIXME  */
+/* FIXME Customize text selection colors */
 /* ::selection { */
 /* background: #ffb7b7; Light red background */
 /* color: #000000;      Black text */

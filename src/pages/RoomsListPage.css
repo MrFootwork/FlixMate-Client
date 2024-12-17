@@ -9,7 +9,6 @@
   align-items: stretch;
   gap: 2px;
 
-  /* FIXME make better round corners */
   & .list-header-row {
     display: flex;
     flex-direction: row;
@@ -23,9 +22,8 @@
 
     width: 100%;
     height: 3rem;
-    border-radius: var(--border-round-s);
-    border-top-left-radius: var(--border-round-m);
-    border-top-right-radius: var(--border-round-m);
+    border-top-left-radius: var(--border-round-l);
+    border-top-right-radius: var(--border-round-l);
     border-top: 2px solid var(--color-background);
     margin-top: 1rem;
     background-color: var(--color-background-secondary);
