@@ -72,8 +72,8 @@
   /* Neutral */
   --color-neutral: #1f2d3d;
   --color-black: #3a4b5b;
-  --shadow-s: 1px 1px 2px -1px hsl(from var(--color-background-secondary) h s
-        calc(l + 30));
+  --shadow-s: 1px 1px 6px -4px hsl(from var(--color-background-secondary) h s
+        calc(l + 45));
   --shadow-l: 2px 2px 7px -6px var(--color-black);
 }
 
