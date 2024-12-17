@@ -2,7 +2,7 @@ import './NavBar.css'
 import logo from '../assets/images/logo.png'
 
 import axios from 'axios'
-import React, { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, useRef } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { Sling as Hamburger } from 'hamburger-react'
@@ -21,13 +21,14 @@ const API_URL = config.API_URL
 const pathsWithoutNav = ['/', '/auth']
 
 function NavBar() {
-  const location = useLocation()
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' })
-  const [mobileMenuIsOpen, setMobileMenu] = useState(false)
-  const [onPathWithNav, setOnPathWithNav] = useState(false)
 
   const { setMessage } = useContext(MessageContext)
   const { setUser } = useContext(AuthContext)
+
+  // PATH CHECK
+  const location = useLocation()
+  const [onPathWithNav, setOnPathWithNav] = useState(false)
 
   useEffect(() => {
     const onWhiteListedPath = !pathsWithoutNav.includes(location.pathname)
@@ -36,6 +37,7 @@ function NavBar() {
     if (!onWhiteListedPath) setOnPathWithNav(false)
   }, [location])
 
+  // AUTH HANDLING
   // TODO use logout function from AuthContext instead
   async function handleLogOut() {
     const { data } = await axios.post(
@@ -43,7 +45,7 @@ function NavBar() {
       {},
       { withCredentials: true }
     )
-    console.log(data)
+    console.log('LOGOUT RESPONSE: ', data)
 
     // Logout
     setUser(null)
@@ -55,9 +57,9 @@ function NavBar() {
     setMessage({ type: 'good', message: 'Succesfully logged out!' })
   }
 
-  // Theme Toggler
+  // THEME TOGGLING
   const { theme, toggleTheme } = useContext(ThemeContext)
-  const [isDarkMode, setDarkMode] = React.useState(false)
+  const [isDarkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
     setDarkMode(theme === 'dark')
@@ -68,8 +70,42 @@ function NavBar() {
     toggleTheme()
   }
 
+  // SUBMENU HANDLING
+  const [mobileMenuIsOpen, setMobileMenu] = useState(false)
+  const [desktopMenuIsOpen, setDesktopMenuIsOpen] = useState(false)
+  const navbarRef = useRef(null)
+
+  function toggleSubmenu() {
+    setDesktopMenuIsOpen(!desktopMenuIsOpen)
+    setMobileMenu(!mobileMenuIsOpen)
+  }
+
+  function closeSubmenu() {
+    setDesktopMenuIsOpen(false)
+    setMobileMenu(false)
+  }
+
+  // Close submenu if clicked outside the navbar
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        console.log('CLICKED OUTSIDE NAV')
+        if (desktopMenuIsOpen || mobileMenuIsOpen) closeSubmenu()
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
   return (
-    <div className={`navbar-container ${onPathWithNav ? 'visible' : ''}`}>
+    <nav
+      className={`navbar-container ${onPathWithNav ? 'visible' : ''}`}
+      ref={navbarRef}
+    >
       {/* Navbar */}
       <>
         <Link to='/browse' className='image-container'>
@@ -101,7 +137,11 @@ function NavBar() {
               onChange={toggleDarkMode}
               size={'2rem'}
             />
-            <NavSelectOption handleLogOut={handleLogOut} />
+            <NavSelectOption
+              handleLogOut={handleLogOut}
+              submenuVisible={desktopMenuIsOpen}
+              toggleSubmenu={toggleSubmenu}
+            />
           </>
         )}
       </>
@@ -112,7 +152,7 @@ function NavBar() {
           className={
             'option-container mobile' + (mobileMenuIsOpen ? ' isActive' : '')
           }
-          onClick={() => setMobileMenu(!mobileMenuIsOpen)}
+          onClick={toggleSubmenu}
         >
           <li>
             <NavLink to='/browse'>Movies</NavLink>
@@ -130,7 +170,7 @@ function NavBar() {
           </li>
         </ul>
       )}
-    </div>
+    </nav>
   )
 }
 

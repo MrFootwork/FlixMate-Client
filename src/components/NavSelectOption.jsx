@@ -3,26 +3,16 @@ import profileIcon from '../assets/images/profile.png'
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-function NavSelectOption({ handleLogOut }) {
-  const [optionsAreVisible, setoptionsAreVisible] = useState(false)
-
-  function toggleOptions() {
-    setoptionsAreVisible(!optionsAreVisible)
-  }
-
+function NavSelectOption({ handleLogOut, submenuVisible, toggleSubmenu }) {
+  // FIXME transition animate coming from above
   return (
     <div className='select-container'>
-      <button className='profile-button' onClick={toggleOptions}>
+      <button className='profile-button' onClick={toggleSubmenu}>
         <img src={profileIcon} alt='' />
       </button>
 
-      {optionsAreVisible && (
-        <ul
-          className='options-container'
-          onClick={() => {
-            setoptionsAreVisible(!optionsAreVisible)
-          }}
-        >
+      {submenuVisible && (
+        <ul className='options-container' onClick={toggleSubmenu}>
           <li>
             <NavLink to='/profile'>Profile</NavLink>
           </li>
