@@ -20,19 +20,17 @@ const RoomCard = ({ room }) => {
 
   if (!movie) return null
   return (
-    <div className='RoomCard'>
-      <div className='details'>
-        <p className={hidden()}>{name}</p>
-        <p className={hidden()}>Owner: {owner.name}</p>
-        <p className={hidden()}>Show: {movie.title}</p>
-        <p className='participants-number'>
-          Participants: {participants.length}
-        </p>
+    <tr className='RoomCard'>
+      <td className='details'>
+        <p>{name}</p>
+        <p>{owner.name}</p>
+        <p className='show'>{movie.title}</p>
+        <p className='participants-number'>{participants.length}</p>
         <button onClick={handleJoin}>Join</button>
         <button className='expand' onClick={handleExpand}>
           {expanded ? 'X' : 'V'}
         </button>
-      </div>
+      </td>
       {expanded ? (
         <ul className='participants'>
           {participants.map(participant => (
@@ -40,7 +38,7 @@ const RoomCard = ({ room }) => {
           ))}
         </ul>
       ) : null}
-    </div>
+    </tr>
   )
 }
 export default RoomCard

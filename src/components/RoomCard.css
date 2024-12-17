@@ -1,47 +1,55 @@
 .RoomCard {
-  width: 95%;
-  max-width: 1200px;
   display: flex;
   flex-direction: column;
-  font-size: larger;
-  border: 1px solid white;
-  border-radius: 2px;
-  padding: 5px 5px;
 
-  p {
-    width: 20%;
-  }
-
-  .hide {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
+  border-radius: var(--border-round-s);
+  padding: 0.5rem 1rem;
+  background-color: var(--color-background-tertiary);
 
   .details {
     width: 100%;
     height: 50px;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
+    gap: 0.5rem;
 
-  .participants {
-    border-top: 1px solid white;
-    margin-top: 10px;
-    li {
-      list-style: none;
+    p {
+      flex: 2 0 10%;
+      text-align: center;
+    }
+
+    p.show {
+      flex: 8;
+      text-align: center;
+    }
+
+    p.participants-number {
+      flex: 2;
     }
   }
 
+  .participants {
+    border-top: 1px solid var(--color-background-secondary);
+    margin-top: 10px;
+    list-style: none;
+  }
+
   button {
-    background-color: white;
-    border: 1px solid white;
-    width: auto;
-    padding: 5px 5px;
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-light);
+    border: none;
     height: 95%;
     aspect-ratio: 1;
-    border-radius: 50px;
+    border-radius: 50%;
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--color-background-secondary-off);
+      transform: scale(1.05);
+    }
   }
 }

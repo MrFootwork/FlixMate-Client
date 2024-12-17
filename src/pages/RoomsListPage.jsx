@@ -24,12 +24,23 @@ const RoomsListPage = () => {
   }, [])
 
   return (
-    <div className='RoomList'>
+    <table className='RoomList'>
+      {/* FIXME place on app and exclude landing page and auth */}
       <ExtensionIndicator />
+
+      <tr className='list-header-row'>
+        <th>Room Name</th>
+        <th>Owner</th>
+        <th className='show'>Current Show</th>
+        <th className='participants'>Viewers</th>
+        <th className='dummy'></th>
+        <th className='dummy'></th>
+      </tr>
+
       {rooms
         ? rooms.map(room => <RoomCard room={room} key={room._id} />)
         : 'Loading...'}
-    </div>
+    </table>
   )
 }
 

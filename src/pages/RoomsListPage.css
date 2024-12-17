@@ -1,7 +1,50 @@
 .RoomList {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
-  gap: 20px;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
+  gap: 2px;
+
+  & .list-header-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+
+    position: sticky;
+    top: var(--navbar-height);
+
+    width: 100%;
+    height: 3rem;
+    border-radius: var(--border-round-s);
+    border-top-left-radius: var(--border-round-m);
+    border-top-right-radius: var(--border-round-m);
+    border-top: 2px solid var(--color-background);
+    margin-top: 1rem;
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-light);
+
+    th {
+      text-align: center;
+      flex: 2 0 10%;
+    }
+
+    th.show {
+      flex: 8;
+    }
+
+    th.participants {
+      flex: 1;
+    }
+
+    th.dummy {
+      flex: 1 0 1rem;
+    }
+  }
 }

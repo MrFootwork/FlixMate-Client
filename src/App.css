@@ -1,4 +1,13 @@
+h1 {
+  font-size: 16px;
+}
+
 :root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-s: 0.8rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.2rem;
+
   /* Primary */
   --color-background: #f5f5f5;
   --color-background-off: hsl(from var(--color-background) h s calc(l - 5));
@@ -9,6 +18,14 @@
   --color-background-secondary: #6c757d;
   --color-background-secondary-off: hsl(
     from var(--color-background-secondary) h s calc(l + 3)
+  );
+
+  /* Tertiary */
+  --color-background-tertiary: hsl(
+    from var(--color-background-secondary) h s calc(l + 45)
+  );
+  --color-background-tertiary-off: hsl(
+    from var(--color-background-tertiary) h s calc(l - 5)
   );
 
   /* Neutral */
@@ -23,8 +40,11 @@
   /* Light text on dark surfaces */
   --color-text-light: #f5f5f5;
 
-  /* Heights */
+  /* Widths, Heights, Spaceing, Borders */
   --navbar-height: 3rem;
+  --border-round-s: 2px;
+  --border-round-m: 4px;
+  --border-round-l: 6px;
 
   /* Z-Indices */
   --z-navbar: 100;
@@ -43,8 +63,16 @@
     from var(--color-background-secondary) h s calc(l - 5)
   );
 
+  /* Tertiary */
+  --color-background-tertiary: hsl(
+    from var(--color-background-secondary) h s calc(l - 15)
+  );
+  --color-background-tertiary-off: hsl(
+    from var(--color-background-tertiary) h s calc(l - 5)
+  );
+
   /* Neutral */
-  --color-neutral: #3a4b5b;
+  --color-neutral: #1f2d3d;
   --color-black: #3a4b5b;
 }
 
