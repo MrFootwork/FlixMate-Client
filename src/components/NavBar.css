@@ -2,6 +2,7 @@
   display: none;
 }
 
+/* FIXME transition animation */
 .navbar-container.visible {
   display: block;
   z-index: var(--z-navbar);

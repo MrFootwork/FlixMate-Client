@@ -1,18 +1,21 @@
 import './App.css'
+import { useContext, useEffect } from 'react'
 import { Routes, Route, useLocation, data } from 'react-router-dom'
 import axios from 'axios'
-import LandingPage from './pages/LandingPage'
-import AuthPage from './pages/AuthPage'
-import HomePage from './pages/HomePage'
-import RoomsListPage from './pages/RoomsListPage'
-import Message from './components/Message'
-import { useContext, useEffect } from 'react'
+
 import { MessageContext } from './contexts/MessageWrapper'
-import NavBar from './components/NavBar'
-import ProtectedRoutes from './utils/ProtectedRoutes'
 import { AuthContext } from './contexts/AuthWrapper'
+import ProtectedRoutes from './utils/ProtectedRoutes'
+
+import HomePage from './pages/HomePage'
+import AuthPage from './pages/AuthPage'
+import LandingPage from './pages/LandingPage'
+import RoomsListPage from './pages/RoomsListPage'
 import ProfilePage from './pages/ProfilePage'
-import MoviesPage from './pages/MoviesPage'
+
+import Message from './components/Message'
+import NavBar from './components/NavBar'
+import ExtensionIndicator from './components/ExtensionIndicator'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -45,6 +48,8 @@ function App() {
   return (
     <>
       <NavBar />
+      <ExtensionIndicator />
+
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/auth' element={<AuthPage />} />
@@ -52,7 +57,6 @@ function App() {
           <Route path='/browse' element={<HomePage />} />
           <Route path='/rooms' element={<RoomsListPage />} />
           <Route path='/profile' element={<ProfilePage />} />
-          <Route path='/search' element={<MoviesPage />} />
         </Route>
       </Routes>
       <Message />

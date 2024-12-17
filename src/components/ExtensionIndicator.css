@@ -6,11 +6,37 @@
   background: none;
   border: none;
 
-  width: 4rem;
+  --width: 4rem;
+  width: var(--width);
   aspect-ratio: 1;
   border-radius: 50%;
 
-  &:hover {
+  z-index: var(--z-navbar);
+  transition: all 0.1s ease-in-out;
+
+  img {
+    transform: translateX(2px);
+    transition: inherit;
+  }
+
+  &:hover img {
+    filter: invert(2);
+  }
+
+  .background {
+    position: absolute;
+    top: calc(var(--width) / 2);
+    left: calc(var(--width) / 2);
+
+    width: 1px;
+    aspect-ratio: 1;
+
+    border-radius: 50%;
     background-color: var(--color-highlight);
+    transition: inherit;
+  }
+
+  &:hover .background {
+    transform: scale(50);
   }
 }

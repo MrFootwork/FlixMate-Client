@@ -1,13 +1,12 @@
 import './HomePage.css'
-import axios from 'axios'
 import config from '../../config'
+import axios from 'axios'
 import { useState, useEffect, useContext } from 'react'
-
-import ExtensionIndicator from '../components/ExtensionIndicator'
-import MovieListCarousel from '../components/MovieListCarousel'
 
 import { AuthContext } from '../contexts/AuthWrapper'
 import { SearchMovieContext } from '../contexts/SearchMovieWrapper'
+
+import MovieListCarousel from '../components/MovieListCarousel'
 
 const HomePage = () => {
   const [movies, setMovies] = useState({})
@@ -30,16 +29,16 @@ const HomePage = () => {
 
   return (
     <div className='homepage-container'>
-      {searchMovies && (
+      {searchMovies.length ? (
         <>
           <h2>Search Results</h2>
           <MovieListCarousel movies={searchMovies} />
         </>
+      ) : (
+        <></>
       )}
       <h2>Top Picks</h2>
       {movies && <MovieListCarousel movies={movies} />}
-      {/* FIXME move this to app */}
-      <ExtensionIndicator />
     </div>
   )
 }

@@ -29,6 +29,8 @@ function MovieListCarousel({ movies }) {
           </button>
         ))}
 
+      {/* FIXME use a wrapper for this modal and style it */}
+      {/* BUG hook.js:608 Warning: react-modal: App element is not defined. Please use `Modal.setAppElement(el)` or set `appElement={el}`.  */}
       <ReactModal
         isOpen={Boolean(selected)}
         shouldCloseOnEsc={true}
