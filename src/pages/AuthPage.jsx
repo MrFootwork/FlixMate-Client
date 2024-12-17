@@ -86,7 +86,7 @@ const AuthPage = () => {
 
   return (
     <div className='AuthPage'>
-      <div className='formContainer'>
+      <div className='form-container'>
         <form onSubmit={handleSubmit}>
           <label htmlFor='email'>
             Email
@@ -113,11 +113,11 @@ const AuthPage = () => {
         <button onClick={handleInvertFormState}>
           {formState === 'login' ? (
             <p>
-              You don't have an account ? Maybe try to <b>SignIn</b>
+              You don't have an account ? Maybe try to <b>Sign In</b>
             </p>
           ) : (
             <p>
-              You already have an account ? Maybe try to <b>LogIn</b>
+              You already have an account ? Maybe try to <b>Login</b>
             </p>
           )}
         </button>
