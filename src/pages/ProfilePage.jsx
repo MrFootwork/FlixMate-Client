@@ -166,7 +166,7 @@ const ProfilePage = () => {
       </header>
 
       <section className='form-container'>
-        <form onSubmit={handleSubmit}>
+        <form className='default' onSubmit={handleSubmit}>
           <label htmlFor='email'>
             Email
             <input

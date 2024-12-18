@@ -88,7 +88,7 @@ const AuthPage = () => {
   return (
     <div className='AuthPage'>
       <div className='form-container'>
-        <form onSubmit={handleSubmit}>
+        <form className='default' onSubmit={handleSubmit}>
           <label htmlFor='email'>
             Email
             <input type='text' name='email' />

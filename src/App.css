@@ -48,6 +48,7 @@
   --border-round-l: 6px;
 
   /* Z-Indices */
+  --z-modal: 2000;
   --z-navbar: 1000;
 }
 
@@ -82,7 +83,6 @@
         calc(l + 45));
   --shadow-l: 2px 2px 7px -6px var(--color-black);
 }
-
 /* FIXME Customize text selection colors */
 /* ::selection { */
 /* background: #ffb7b7; Light red background */
@@ -98,8 +98,9 @@ input {
   font-size: var(--font-size-m);
 }
 
-/* Login, Sign In, Profile Page */
-.form-container {
+/* Login, Sign In, Profile Page, Modals */
+.form-container,
+.modal-container {
   width: 95%;
   max-width: 400px;
   margin: 1rem auto;
@@ -112,64 +113,64 @@ input {
   background-color: var(--color-background-off);
   border-radius: var(--border-round-l);
   box-shadow: var(--shadow-l);
+}
 
-  form {
+form.default {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  font-size: var(--font-size-m);
+
+  label {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    gap: 1rem;
     width: 100%;
     font-size: var(--font-size-m);
+  }
 
-    label {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      font-size: var(--font-size-m);
+  input {
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+    margin-top: 0.3rem;
+    font-size: var(--font-size-m);
+
+    border-radius: var(--border-round-s);
+    border: none;
+    background-color: hsl(from var(--color-background) h s calc(l + 20));
+    color: var(--color-text);
+
+    &:disabled {
+      color: hsl(from var(--color-background-secondary) h s calc(l + 15));
     }
+  }
 
-    input {
-      width: 100%;
-      padding: 0.3rem 0.5rem;
-      margin-top: 0.3rem;
-      font-size: var(--font-size-m);
+  .button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 1rem;
+  }
 
-      border-radius: var(--border-round-s);
-      border: none;
-      background-color: hsl(from var(--color-background) h s calc(l + 20));
-      color: var(--color-text);
+  input[type='submit'],
+  .button-container button {
+    cursor: pointer;
+    width: 100%;
+    padding: 0.3rem;
 
-      &:disabled {
-        color: hsl(from var(--color-background-secondary) h s calc(l + 15));
-      }
-    }
+    border: none;
+    border-radius: var(--border-round-s);
+    background-color: var(--color-background-secondary);
+    color: var(--color-light);
+    box-shadow: var(--shadow-s);
 
-    .button-container {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      gap: 1rem;
-    }
+    font-size: var(--font-size-m);
 
-    input[type='submit'],
-    .button-container button {
-      cursor: pointer;
-      width: 100%;
-      padding: 0.3rem;
-
-      border: none;
-      border-radius: var(--border-round-s);
-      background-color: var(--color-background-secondary);
-      color: var(--color-light);
-      box-shadow: var(--shadow-s);
-
-      font-size: var(--font-size-m);
-
-      &:hover {
-        background-color: var(--color-background-secondary-off);
-      }
+    &:hover {
+      background-color: var(--color-background-secondary-off);
     }
   }
 }

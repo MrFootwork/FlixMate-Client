@@ -1,8 +1,8 @@
 import './MovieListCarousel.css'
-import ReactModal from 'react-modal'
-import RoomCreation from './RoomCreation'
 import { useState } from 'react'
+
 import Modal from './Modal'
+import RoomCreation from './RoomCreation'
 
 function MovieListCarousel({ movies }) {
   const [selected, setSelected] = useState(false)
