@@ -9,6 +9,13 @@
   align-items: stretch;
   gap: 2px;
 
+  thead {
+    display: table-header-group;
+    position: sticky;
+    top: var(--navbar-height);
+    margin-top: 1rem;
+  }
+
   & .list-header-row {
     display: flex;
     flex-direction: row;
@@ -17,15 +24,11 @@
     gap: 0.5rem;
     padding: 0 1rem;
 
-    position: sticky;
-    top: var(--navbar-height);
-
     width: 100%;
     height: 3rem;
     border-top-left-radius: var(--border-round-l);
     border-top-right-radius: var(--border-round-l);
     border-top: 2px solid var(--color-background);
-    margin-top: 1rem;
     background-color: var(--color-background-secondary);
     color: var(--color-light);
 
@@ -52,6 +55,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    gap: 2px;
+    gap: 1px;
   }
 }

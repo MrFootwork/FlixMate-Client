@@ -1,5 +1,5 @@
 import './App.css'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Routes, Route, useLocation, data } from 'react-router-dom'
 import axios from 'axios'
 
@@ -45,21 +45,38 @@ function App() {
       .catch(error => console.error(error))
   }, [])
 
+  // Close Navbar's Submenus
+  const [mobileMenuIsOpen, setMobileMenuIsOpen] = useState(false)
+  const [desktopMenuIsOpen, setDesktopMenuIsOpen] = useState(false)
+
+  function closeSubmenu() {
+    setDesktopMenuIsOpen(false)
+    setMobileMenuIsOpen(false)
+  }
+
   return (
     <>
-      <NavBar />
+      <NavBar
+        mobileMenuIsOpen={mobileMenuIsOpen}
+        setMobileMenuIsOpen={setMobileMenuIsOpen}
+        desktopMenuIsOpen={desktopMenuIsOpen}
+        setDesktopMenuIsOpen={setDesktopMenuIsOpen}
+      />
       <ExtensionIndicator />
-
-      <Routes>
-        <Route path='/' element={<LandingPage />} />
-        <Route path='/auth' element={<AuthPage />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route path='/browse' element={<HomePage />} />
-          <Route path='/rooms' element={<RoomsListPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
-        </Route>
-      </Routes>
       <Message />
+
+      <main onClick={closeSubmenu}>
+        <Routes>
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/auth' element={<AuthPage />} />
+
+          <Route element={<ProtectedRoutes />}>
+            <Route path='/browse' element={<HomePage />} />
+            <Route path='/rooms' element={<RoomsListPage />} />
+            <Route path='/profile' element={<ProfilePage />} />
+          </Route>
+        </Routes>
+      </main>
     </>
   )
 }
