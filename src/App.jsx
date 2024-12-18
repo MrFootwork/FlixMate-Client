@@ -16,6 +16,7 @@ import ProfilePage from './pages/ProfilePage'
 import Message from './components/Message'
 import NavBar from './components/NavBar'
 import ExtensionIndicator from './components/ExtensionIndicator'
+import RoomMessengerPage from './pages/RoomMessengerPage'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -57,6 +58,7 @@ function App() {
           <Route path='/browse' element={<HomePage />} />
           <Route path='/rooms' element={<RoomsListPage />} />
           <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/rooms/:roomId' element={<RoomMessengerPage />} />
         </Route>
       </Routes>
       <Message />
