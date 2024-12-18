@@ -32,6 +32,7 @@ const RoomsListPage = () => {
           <th className='participants'>Viewers</th>
           <th className='dummy'></th>
           <th className='dummy'></th>
+          <th className='dummy'></th>
         </tr>
       </thead>
 
