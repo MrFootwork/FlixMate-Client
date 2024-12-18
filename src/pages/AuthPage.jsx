@@ -24,6 +24,7 @@ const AuthPage = () => {
   }
 
   async function logIn(e) {
+    // FIXME Extract this to AuthWrapper
     const { data } = await axios.post(API_URL + '/auth/login', {
       email: e.target.email.value,
       password: e.target.password.value,
