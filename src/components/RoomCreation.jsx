@@ -3,8 +3,9 @@ import './RoomCreation.css'
 import axios from 'axios'
 import { AuthContext } from '../contexts/AuthWrapper'
 import { useNavigate } from 'react-router-dom'
+import config from '../../config'
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = config.API_URL
 
 const RoomCreation = ({ movie }) => {
   const { token } = useContext(AuthContext)
@@ -34,8 +35,8 @@ const RoomCreation = ({ movie }) => {
   }
 
   return (
-    <div className='RoomCreation'>
-      <form onSubmit={handleRoomCreation}>
+    <div className='RoomCreation '>
+      <form className='default' onSubmit={handleRoomCreation}>
         <label htmlFor='movie'>
           Movie
           <input type='text' name='movie' value={movie.title} disabled={true} />

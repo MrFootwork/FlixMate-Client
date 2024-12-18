@@ -2,7 +2,7 @@ import './NavBar.css'
 import logo from '../assets/images/logo.png'
 
 import axios from 'axios'
-import { useState, useContext, useEffect, useRef } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { Sling as Hamburger } from 'hamburger-react'
@@ -20,7 +20,12 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode'
 const API_URL = config.API_URL
 const pathsWithoutNav = ['/', '/auth']
 
-function NavBar() {
+function NavBar({
+  desktopMenuIsOpen,
+  mobileMenuIsOpen,
+  setDesktopMenuIsOpen,
+  setMobileMenuIsOpen,
+}) {
   const isMobile = useMediaQuery({ query: '(max-width: 800px)' })
 
   const { setMessage } = useContext(MessageContext)
@@ -71,43 +76,13 @@ function NavBar() {
   }
 
   // SUBMENU HANDLING
-  const [mobileMenuIsOpen, setMobileMenu] = useState(false)
-  const [desktopMenuIsOpen, setDesktopMenuIsOpen] = useState(false)
-  const navbarRef = useRef(null)
-
   function toggleSubmenu() {
     setDesktopMenuIsOpen(!desktopMenuIsOpen)
-    setMobileMenu(!mobileMenuIsOpen)
+    setMobileMenuIsOpen(!mobileMenuIsOpen)
   }
-
-  function closeSubmenu() {
-    console.log('CLOSING SUBMENUS')
-    setDesktopMenuIsOpen(false)
-    setMobileMenu(false)
-  }
-
-  // Close submenu if clicked outside the navbar
-  useEffect(() => {
-    // BUG doesn't work on first page load
-    function handleClickOutside(event) {
-      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-        console.log('clicked outside of NAV', event.target)
-        if (desktopMenuIsOpen || mobileMenuIsOpen) closeSubmenu()
-      }
-    }
-
-    document.addEventListener('click', handleClickOutside)
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside)
-    }
-  }, [])
 
   return (
-    <nav
-      className={`navbar-container ${onPathWithNav ? 'visible' : ''}`}
-      ref={navbarRef}
-    >
+    <nav className={`navbar-container ${onPathWithNav ? 'visible' : ''}`}>
       {/* Navbar */}
       <>
         <Link to='/browse' className='image-container'>
@@ -124,13 +99,17 @@ function NavBar() {
               onChange={toggleDarkMode}
               size={'2rem'}
             />
-            <Hamburger toggled={mobileMenuIsOpen} toggle={setMobileMenu} />
+            <Hamburger
+              toggled={mobileMenuIsOpen}
+              toggle={setMobileMenuIsOpen}
+            />
           </>
         )}
 
         {/* Desktop */}
         {!isMobile && (
           <>
+            {/* FIXME apply NavLink styles */}
             <NavLink to='/browse'>Movies</NavLink>
             <NavLink to='/rooms'>Rooms</NavLink>
             <DarkModeSwitch

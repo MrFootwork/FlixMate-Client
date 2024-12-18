@@ -7,6 +7,7 @@ const Message = () => {
   const { message, setMessage } = useContext(MessageContext)
 
   // Reset message after a while
+  // FIXME disappears tooo early on logout
   useEffect(() => {
     const timer = setTimeout(() => {
       setMessage(prev => ({ ...prev, message: '' }))

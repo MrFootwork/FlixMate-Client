@@ -24,6 +24,7 @@ const AuthPage = () => {
   }
 
   async function logIn(e) {
+    // FIXME Extract this to AuthWrapper
     const { data } = await axios.post(API_URL + '/auth/login', {
       email: e.target.email.value,
       password: e.target.password.value,
@@ -87,7 +88,7 @@ const AuthPage = () => {
   return (
     <div className='AuthPage'>
       <div className='form-container'>
-        <form onSubmit={handleSubmit}>
+        <form className='default' onSubmit={handleSubmit}>
           <label htmlFor='email'>
             Email
             <input type='text' name='email' />
