@@ -14,6 +14,7 @@ function ExtensionIndicator() {
   }, [pathname])
 
   function openInstallationGuide() {
+    // FIXME use the modal wrapper to show installation guide
     console.log('Opening installation guide...')
   }
 

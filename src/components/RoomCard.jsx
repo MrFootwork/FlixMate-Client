@@ -9,10 +9,6 @@ const RoomCard = ({ room }) => {
     setExpanded(!expanded)
   }
 
-  function hidden() {
-    return expanded ? '' : 'hide'
-  }
-
   function handleJoin() {
     const roomLink = `https://netflix.com/watch/${movie.id}?flixmate=${room._id}`
     window.open(roomLink, '_blank', 'noopener,noreferrer')
@@ -32,11 +28,13 @@ const RoomCard = ({ room }) => {
         </button>
       </td>
       {expanded ? (
-        <ul className='participants'>
-          {participants.map(participant => (
-            <li key={participant._id}>{participant.name}</li>
-          ))}
-        </ul>
+        <td>
+          <ul className='participants'>
+            {participants.map(participant => (
+              <li key={participant._id}>{participant.name}</li>
+            ))}
+          </ul>
+        </td>
       ) : null}
     </tr>
   )

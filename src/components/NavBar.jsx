@@ -81,14 +81,17 @@ function NavBar() {
   }
 
   function closeSubmenu() {
+    console.log('CLOSING SUBMENUS')
     setDesktopMenuIsOpen(false)
     setMobileMenu(false)
   }
 
   // Close submenu if clicked outside the navbar
   useEffect(() => {
+    // BUG doesn't work on first page load
     function handleClickOutside(event) {
       if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        console.log('clicked outside of NAV', event.target)
         if (desktopMenuIsOpen || mobileMenuIsOpen) closeSubmenu()
       }
     }
