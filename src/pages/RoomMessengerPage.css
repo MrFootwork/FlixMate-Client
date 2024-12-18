@@ -1,0 +1,40 @@
+.messenger-page-container {
+  height: 100%;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  .messages-container {
+    .messages-history-container {
+      overflow: auto;
+    }
+  }
+
+  .messages-input-container {
+    position: fixed;
+    bottom: 0;
+
+    width: 100%;
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: row;
+
+    input {
+      padding: 1rem;
+
+      width: 100%;
+      margin-top: 0.3rem;
+      font-size: var(--font-size-m);
+
+      border-radius: var(--border-round-s);
+      border: none;
+      background-color: var(--color-light);
+
+      &:disabled {
+        color: hsl(from var(--color-background-secondary) h s calc(l + 15));
+      }
+    }
+  }
+}

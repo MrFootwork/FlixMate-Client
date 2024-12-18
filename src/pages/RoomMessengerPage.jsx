@@ -1,22 +1,42 @@
-import { useContext } from 'react'
-import { useState, useEffect } from 'react'
-import { useRef } from 'react'
-import { AuthContext } from '../contexts/AuthWrapper'
+import './RoomMessengerPage.css'
+import { useRef, useState, useEffect, useContext } from 'react'
+import { useParams } from 'react-router-dom'
 import io from 'socket.io-client'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+
+import { AuthContext } from '../contexts/AuthWrapper'
+import MessengerMessageCard from '../components/MessengerMessageCard'
 
 const API_URL = import.meta.env.VITE_API_URL
 
 function RoomMessengerPage() {
+  // CONNECTION
+  const { token } = useContext(AuthContext)
+  const [socket, setSocket] = useState(null)
+
+  useEffect(() => {
+    if (token && !socket) {
+      setSocket(
+        io(API_URL, {
+          auth: { token },
+        })
+      )
+    }
+  }, [token])
+
+  // ROOM
   const { roomId } = useParams()
   const [room, setRoom] = useState(null)
-  const [messages, setMessages] = useState(null)
-  const [socket, setSocket] = useState(null)
   const [joined, setJoined] = useState(null)
-  const { token } = useContext(AuthContext)
 
+  // MESSAGES
+  const [messages, setMessages] = useState(null)
   const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (messages) return
+    getRoomMessages()
+  }, [token])
 
   async function getRoomMessages() {
     if (!token) return
@@ -29,21 +49,6 @@ function RoomMessengerPage() {
     setRoom(data)
     setMessages(data.messages)
   }
-
-  useEffect(() => {
-    if (messages) return
-    getRoomMessages()
-  }, [token])
-
-  useEffect(() => {
-    if (token && !socket) {
-      setSocket(
-        io(API_URL, {
-          auth: { token },
-        })
-      )
-    }
-  }, [token])
 
   useEffect(() => {
     if (socket) {
@@ -75,28 +80,55 @@ function RoomMessengerPage() {
     }
   }, [socket, messages])
 
-  function sendMessage(text) {
-    socket.emit('receive-message', text)
+  function sendMessage() {
+    const inputMessage = inputRef.current.value
+    socket.emit('receive-message', inputMessage)
   }
 
-  function handleSend() {
-    sendMessage(inputRef.current.value)
-    // console.log(inputRef.current.value)
-  }
   return (
-    <div className='messenger-container'>
-      <div className='top-bar'>
-        <div>Room : {room && room.name}</div>
-      </div>
-      <div>
-        <input type='text' ref={inputRef} />
-        <button onClick={handleSend}>Click Me</button>
-      </div>
-      <div className='messages-container'>
-        {/* <MessageCard message={null} /> */}
-        {messages &&
-          messages.map(message => <p key={message._id}>{message.text}</p>)}
-      </div>
+    <div className='messenger-page-container'>
+      {/* <aside>
+        <header>Rooms</header>
+        <nav>
+          <ul>
+            <li>Room 1</li>
+            <li>Room 2</li>
+          </ul>
+        </nav>
+      </aside> */}
+
+      <section className='messages-container'>
+        <section className='messages-history-container'>
+          {messages &&
+            messages.map(message => (
+              <MessengerMessageCard key={message._id} message={message} />
+            ))}
+        </section>
+
+        <section className='messages-input-container'>
+          <input type='text' ref={inputRef} placeholder='Type a message' />
+          <button onClick={sendMessage}>Click Me</button>
+        </section>
+      </section>
+
+      {/* <aside>
+        <header>
+          <div>
+            <img src='' alt='Room Image' />
+          </div>
+          <h2>Room {room && room.name}</h2>
+          <nav>
+            <button>Enter Watch Party</button>
+          </nav>
+        </header>
+        <section>
+          <h3>Room Members</h3>
+          <ul>
+            <li>Member 1</li>
+            <li>Member 2</li>
+          </ul>
+        </section>
+      </aside> */}
     </div>
   )
 }

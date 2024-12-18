@@ -1,0 +1,36 @@
+.message-block {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .message-container {
+    padding: 1rem 3rem;
+    max-width: 60%;
+
+    background-color: var(--color-background-secondary-off);
+
+    .message-content {
+    }
+  }
+
+  .message-time {
+    font-size: var(--font-size-s);
+    color: var(--color-background-secondary);
+  }
+
+  &.me {
+    .message-container {
+      align-self: flex-end;
+      background-color: var(--color-background-tertiary);
+
+      .message-content {
+      }
+    }
+
+    .message-time {
+      align-self: flex-end;
+    }
+  }
+}

@@ -15,6 +15,7 @@ function NavSelectOption({ handleLogOut, submenuVisible, toggleSubmenu }) {
         onClick={toggleSubmenu}
       >
         <div className='triangle'></div>
+        {/* TODO add header with user's name */}
         <li>
           <NavLink to='/profile'>Profile</NavLink>
         </li>
