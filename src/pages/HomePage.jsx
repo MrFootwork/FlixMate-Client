@@ -11,7 +11,7 @@ import MovieListCarousel from '../components/MovieListCarousel'
 const HomePage = () => {
   const [movies, setMovies] = useState({})
   const { token } = useContext(AuthContext)
-  const { movies: searchMovies } = useContext(SearchMovieContext)
+  const { movies: searchMovies, searchValue } = useContext(SearchMovieContext)
 
   useEffect(() => {
     axios
@@ -31,7 +31,7 @@ const HomePage = () => {
     <div className='homepage-container'>
       {searchMovies.length ? (
         <>
-          <h2>Search Results</h2>
+          <h2>Search results for "{searchValue}"</h2>
           <MovieListCarousel movies={searchMovies} />
         </>
       ) : (

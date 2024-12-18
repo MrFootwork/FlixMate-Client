@@ -13,11 +13,13 @@ function SearchMovieWrapper({ children }) {
   const { token } = useContext(AuthContext)
   const { search } = useLocation()
   const [movies, setMovies] = useState([])
+  const [searchValue, setSearchValue] = useState(null)
 
   useEffect(() => {
     async function searchMovies() {
       const searchParams = new URLSearchParams(search)
       const searchValue = searchParams.get('search') || ''
+      setSearchValue(searchValue)
 
       try {
         const { data } = await axios.get(API_URL + '/movies?s=' + searchValue, {
@@ -36,7 +38,7 @@ function SearchMovieWrapper({ children }) {
   }, [search])
 
   return (
-    <SearchMovieContext.Provider value={{ movies }}>
+    <SearchMovieContext.Provider value={{ movies, searchValue }}>
       {children}
     </SearchMovieContext.Provider>
   )
