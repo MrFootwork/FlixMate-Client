@@ -1,21 +1,28 @@
 .messenger-page-container {
-  height: 100%;
+  max-height: calc(100vh - var(--navbar-height));
   overflow: hidden;
 
   display: flex;
-  flex-direction: column;
+  position: relative;
 
   .messages-container {
+    overflow-y: scroll;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
     .messages-history-container {
-      overflow: auto;
+      margin-top: 2rem;
+      padding: 0 2rem;
     }
   }
 
   .messages-input-container {
-    position: fixed;
+    position: sticky;
+    width: inherit;
     bottom: 0;
 
-    width: 100%;
     padding: 2rem;
 
     display: flex;
@@ -24,7 +31,7 @@
     input {
       padding: 1rem;
 
-      width: 100%;
+      width: inherit;
       margin-top: 0.3rem;
       font-size: var(--font-size-m);
 
@@ -36,5 +43,9 @@
         color: hsl(from var(--color-background-secondary) h s calc(l + 15));
       }
     }
+  }
+
+  .room-nav-sidebar {
+    height: 100%;
   }
 }

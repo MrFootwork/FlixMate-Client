@@ -87,7 +87,7 @@ function RoomMessengerPage() {
 
   return (
     <div className='messenger-page-container'>
-      {/* <aside>
+      <aside className='room-nav-sidebar'>
         <header>Rooms</header>
         <nav>
           <ul>
@@ -95,7 +95,7 @@ function RoomMessengerPage() {
             <li>Room 2</li>
           </ul>
         </nav>
-      </aside> */}
+      </aside>
 
       <section className='messages-container'>
         <section className='messages-history-container'>
@@ -111,7 +111,7 @@ function RoomMessengerPage() {
         </section>
       </section>
 
-      {/* <aside>
+      <aside>
         <header>
           <div>
             <img src='' alt='Room Image' />
@@ -128,7 +128,7 @@ function RoomMessengerPage() {
             <li>Member 2</li>
           </ul>
         </section>
-      </aside> */}
+      </aside>
     </div>
   )
 }
