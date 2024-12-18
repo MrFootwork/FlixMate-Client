@@ -27,7 +27,6 @@ function SearchBar() {
       if (event.ctrlKey && event.key === 'k') {
         event.preventDefault()
         inputRef.current.focus()
-        inputRef.current.select()
       }
 
       // Remove focus from Search Bar
@@ -44,6 +43,10 @@ function SearchBar() {
     }
   }, [])
 
+  function handleFocus() {
+    inputRef.current.select()
+  }
+
   return (
     <div className='searchbar-container'>
       <div className='glas'>🔍</div>
@@ -51,10 +54,11 @@ function SearchBar() {
         type='text'
         name='movieInput'
         id='movieInput'
-        placeholder='Search here, e.g. Hobbits...'
+        placeholder='Search here, e.g. Lord of the rings...'
         onKeyDown={handleSubmit}
         value={search}
         onChange={e => setSearch(e.target.value)}
+        onFocus={handleFocus}
         ref={inputRef}
       />
       <div className='shortcut'>Ctrl+K</div>
