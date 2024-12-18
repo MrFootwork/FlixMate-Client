@@ -48,7 +48,7 @@
   --border-round-l: 6px;
 
   /* Z-Indices */
-  --z-navbar: 100;
+  --z-navbar: 1000;
 }
 
 [data-theme='dark'] {

@@ -1,6 +1,5 @@
 import './NavSelectOption.css'
 import profileIcon from '../assets/images/profile.png'
-import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 function NavSelectOption({ handleLogOut, submenuVisible, toggleSubmenu }) {
@@ -11,18 +10,20 @@ function NavSelectOption({ handleLogOut, submenuVisible, toggleSubmenu }) {
         <img src={profileIcon} alt='' />
       </button>
 
-      {submenuVisible && (
-        <ul className='options-container' onClick={toggleSubmenu}>
-          <li>
-            <NavLink to='/profile'>Profile</NavLink>
-          </li>
-          <li>
-            <NavLink to='/auth' onClick={handleLogOut}>
-              Log Out
-            </NavLink>
-          </li>
-        </ul>
-      )}
+      <ul
+        className={`options-container ${submenuVisible ? 'visible' : ''}`}
+        onClick={toggleSubmenu}
+      >
+        <div className='triangle'></div>
+        <li>
+          <NavLink to='/profile'>Profile</NavLink>
+        </li>
+        <li>
+          <NavLink to='/auth' onClick={handleLogOut}>
+            Log Out
+          </NavLink>
+        </li>
+      </ul>
     </div>
   )
 }

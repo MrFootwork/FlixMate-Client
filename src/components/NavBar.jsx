@@ -89,7 +89,6 @@ function NavBar() {
   useEffect(() => {
     function handleClickOutside(event) {
       if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-        console.log('CLICKED OUTSIDE NAV')
         if (desktopMenuIsOpen || mobileMenuIsOpen) closeSubmenu()
       }
     }

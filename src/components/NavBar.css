@@ -41,6 +41,7 @@
   .option-container.mobile {
     display: none;
     list-style: none;
+    z-index: inherit;
 
     &.isActive {
       display: block;

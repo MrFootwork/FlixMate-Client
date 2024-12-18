@@ -1,5 +1,8 @@
 .select-container {
+  position: relative;
   flex: 1 0 0;
+  z-index: inherit;
+  --img-width: 2.5rem;
 
   & .profile-button {
     border: none;
@@ -8,21 +11,28 @@
     display: flex;
 
     & > img {
-      width: 2.5rem;
+      width: var(--img-width);
       aspect-ratio: 1;
     }
   }
 
   & .options-container {
+    /* BUG this element stays above navbar isntead of below */
+    z-index: 900;
     position: absolute;
-    top: 3rem;
-    right: 1rem;
+
+    top: 3.5rem;
+    left: calc(-10rem + var(--img-width));
+    transform: translateY(-150px);
+    transition: all 0.2s ease-in-out;
+
+    list-style: none;
+    width: 10rem;
+    background-color: var(--color-background-secondary);
+    border-radius: var(--border-round-m);
 
     display: flex;
     flex-direction: column;
-
-    background-color: var(--color-background-secondary);
-    list-style: none;
 
     & li {
       padding: 0.5rem 1rem;
@@ -32,6 +42,7 @@
         background-color: hsl(
           from var(--color-background-secondary) h s calc(l + 3)
         );
+        border-radius: var(--border-round-m);
       }
 
       & a {
@@ -39,5 +50,23 @@
         color: var(--color-light);
       }
     }
+
+    .triangle {
+      z-index: 0;
+      position: absolute;
+      top: -9px;
+      right: 11px;
+
+      /* Triangle */
+      width: 0;
+      height: 0;
+      border-left: 0.5rem solid transparent;
+      border-right: 0.5rem solid transparent;
+      border-bottom: 0.6rem solid var(--color-background-secondary);
+    }
+  }
+
+  & .options-container.visible {
+    transform: translateY(0);
   }
 }
