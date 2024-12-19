@@ -25,23 +25,27 @@ import { formatDate } from '../utils/date'
 /**
  * A React functional component that processes a message.
  *
- * @param {{ message: Message }} props - The props for the component, including the message object.
+ * @param {{ message: Message, nextMessage: Message }} props - The props for the component, including the message object.
  * @returns {JSX.Element} A rendered JSX element.
  */
-function MessengerMessageCard({ message }) {
+function MessengerMessageCard({ message, nextMessage }) {
   const { user } = useContext(AuthContext)
   const [itsMe, setItsMe] = useState(false)
   const [updated, setUpdated] = useState(false)
+  const [isDescendant, setIsDescendant] = useState(false)
 
   useEffect(() => {
-    if (user) setItsMe(user._id === message.user._id)
-
     const wasUpdated =
       new Date(message.createdAt).toISOString() !==
       new Date(message.updatedAt).toISOString()
 
+    const descendsNextMessage =
+      nextMessage && nextMessage.user._id === message.user._id
+
+    if (user) setItsMe(user._id === message.user._id)
     if (wasUpdated) setUpdated(true)
-  }, [])
+    if (descendsNextMessage) setIsDescendant(true)
+  }, [nextMessage])
 
   return (
     <div className={`message-block ${itsMe ? 'me' : ''}`}>
@@ -49,12 +53,17 @@ function MessengerMessageCard({ message }) {
         <p className='message-content'>
           {message.text} by {itsMe ? 'me' : message.user.name}
         </p>
+        {updated && <p className='edited'>(edited)</p>}
       </div>
-      <p className='message-time'>
-        {updated
-          ? `${formatDate(new Date(message.updatedAt))} (edited)`
-          : formatDate(new Date(message.createdAt))}
-      </p>
+      {isDescendant ? (
+        <></>
+      ) : (
+        <p className='message-time'>
+          {updated
+            ? `${formatDate(new Date(message.updatedAt))} (edited)`
+            : formatDate(new Date(message.createdAt))}
+        </p>
+      )}
     </div>
   )
 }

@@ -36,6 +36,7 @@
   /* Fixed Colors */
   --color-success: #3ddc84;
   --color-attention: #ffc107;
+
   /* Dark text on bright surfaces */
   --color-dark: #1f2d3d;
   /* Light text on dark surfaces */
@@ -52,7 +53,7 @@
   --z-navbar: 1000;
 }
 
-[data-theme='dark'] {
+:root[data-theme='dark'] {
   /* Primary */
   --color-background: #121212;
   --color-background-off: hsl(from var(--color-background) h s calc(l + 5));
@@ -96,6 +97,40 @@ body {
 
 input {
   font-size: var(--font-size-m);
+}
+
+/* Scrollbar */
+:root {
+  --handle: var(--color-background-secondary-off-2);
+  --handle-hover: var(--color-background-secondary-off);
+}
+
+[data-theme='dark'] {
+  --handle: var(--color-background-secondary-off);
+  --handle-hover: hsl(
+    from var(--color-background-secondary-off) h s calc(l + 15)
+  );
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-background-tertiary);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--handle);
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--handle-hover);
 }
 
 /* Login, Sign In, Profile Page, Modals */

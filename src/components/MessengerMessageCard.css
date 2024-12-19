@@ -1,29 +1,78 @@
+:root {
+  /* ME card color */
+  --color-messenger-card-right: var(--color-background-tertiary);
+  /* card color */
+  --color-messenger-card-left: hsl(
+    from var(--color-messenger-card-right) h s calc(l - 20)
+  );
+  /* (edited) tag font color */
+  --color-messenger-card-left-edited: hsl(from var(--color-text) h s l / 0.5);
+}
+
+[data-theme='dark'] {
+  /* ME card color */
+  --color-messenger-card-right: var(--color-background-tertiary);
+  /* card color */
+  --color-messenger-card-left: hsl(
+    from var(--color-messenger-card-right) h s calc(l + 20)
+  );
+  /* (edited) tag font color */
+  --color-messenger-card-left-edited: hsl(from var(--color-text) h s l / 0.3);
+}
+
 .message-block {
   width: 100%;
+  padding-top: 0.75rem;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   .message-container {
-    padding: 1rem 3rem;
+    position: relative;
+
+    line-height: 1.5rem;
+    padding: 0.75rem 2rem;
     max-width: 80%;
 
-    background-color: var(--color-background-secondary-off);
+    border-radius: calc(2 * var(--border-round-l));
+    border-bottom-left-radius: var(--border-round-s);
+    background-color: var(--color-messenger-card-left);
 
     .message-content {
+    }
+
+    &:has(> .edited) {
+      padding-bottom: 1.25rem;
+
+      .edited {
+        font-size: var(--font-size-s);
+        color: var(--color-messenger-card-left-edited);
+
+        /* Reposition | Can't use left property */
+        /* Because I couldn't reset the left property in the .me case */
+        position: absolute;
+        margin-top: -0.25rem;
+        margin-left: -1.75rem;
+      }
     }
   }
 
   .message-time {
     font-size: var(--font-size-s);
     color: var(--color-background-secondary);
+    opacity: 0.75;
+
+    margin-bottom: -1rem;
   }
 
   &.me {
     .message-container {
       align-self: flex-end;
-      background-color: var(--color-background-tertiary);
+
+      border-radius: calc(2.5 * var(--border-round-l));
+      border-bottom-right-radius: var(--border-round-s);
+      background-color: var(--color-messenger-card-right);
 
       .message-content {
       }
@@ -31,6 +80,11 @@
 
     .message-time {
       align-self: flex-end;
+    }
+
+    .edited {
+      right: 0;
+      margin-right: 0.5rem;
     }
   }
 }

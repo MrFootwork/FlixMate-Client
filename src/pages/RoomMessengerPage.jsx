@@ -85,6 +85,13 @@ function RoomMessengerPage() {
     socket.emit('receive-message', inputMessage)
   }
 
+  // Scroll to bottom on first render
+  const bottomRef = useRef(null)
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
   return (
     <div className='messenger-page-container'>
       <aside className='room-nav-sidebar'>
@@ -100,9 +107,14 @@ function RoomMessengerPage() {
       <section className='messages-container'>
         <section className='messages-history-container'>
           {messages &&
-            messages.map(message => (
-              <MessengerMessageCard key={message._id} message={message} />
+            messages.map((message, i) => (
+              <MessengerMessageCard
+                key={message._id}
+                message={message}
+                nextMessage={messages[i + 1]}
+              />
             ))}
+          <div ref={bottomRef}></div>
         </section>
 
         <section className='messages-input-container'>
