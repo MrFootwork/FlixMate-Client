@@ -15,6 +15,16 @@ function RoomMessengerPage() {
   const [socket, setSocket] = useState(null)
 
   useEffect(() => {
+    // Only runs on component destruction
+    return () => {
+      if (socket) {
+        socket.disconnect()
+        setSocket(null)
+      }
+    }
+  }, [socket])
+
+  useEffect(() => {
     if (token && !socket) {
       setSocket(
         io(API_URL, {
@@ -71,6 +81,10 @@ function RoomMessengerPage() {
         console.log('Received new message: ', message, messages)
         setMessages([...messages, message])
       })
+
+      // socket.on('disconnect', () => {
+      //   setSocket(null)
+      // })
 
       return () => {
         socket.off('error')

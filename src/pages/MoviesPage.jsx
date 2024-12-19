@@ -32,7 +32,7 @@ const MoviesPage = () => {
     searchForMovies()
   }, [query])
 
-  return <div>{movies && <MovieListCarousel movies={movies} />}</div>
+  return <div>{movies && <MovieList movies={movies} />}</div>
 }
 
 export default MoviesPage

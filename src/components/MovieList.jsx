@@ -1,10 +1,10 @@
-import './MovieListCarousel.css'
+import './MovieList.css'
 import { useState } from 'react'
 
 import Modal from './Modal'
 import RoomCreation from './RoomCreation'
 
-function MovieListCarousel({ movies }) {
+function MovieList({ movies }) {
   const [selected, setSelected] = useState(false)
 
   function createRoom(movie) {
@@ -41,4 +41,4 @@ function MovieListCarousel({ movies }) {
   )
 }
 
-export default MovieListCarousel
+export default MovieList

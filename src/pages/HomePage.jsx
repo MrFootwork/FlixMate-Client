@@ -6,10 +6,11 @@ import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../contexts/AuthWrapper'
 import { SearchMovieContext } from '../contexts/SearchMovieWrapper'
 
-import MovieListCarousel from '../components/MovieListCarousel'
+import MovieList from '../components/MovieList'
+import MovieCarousel from '../components/MovieCarousel'
 
 const HomePage = () => {
-  const [movies, setMovies] = useState({})
+  const [movies, setMovies] = useState(null)
   const { token } = useContext(AuthContext)
   const { movies: searchMovies, searchValue } = useContext(SearchMovieContext)
 
@@ -32,13 +33,14 @@ const HomePage = () => {
       {searchMovies.length ? (
         <>
           <h2>Search results for "{searchValue}"</h2>
-          <MovieListCarousel movies={searchMovies} />
+          <MovieList movies={searchMovies} />
         </>
       ) : (
         <></>
       )}
       <h2>Top Picks</h2>
-      {movies && <MovieListCarousel movies={movies} />}
+      {movies && <MovieCarousel movies={movies} />}
+      {/* {movies && <MovieList movies={movies} />} */}
     </div>
   )
 }
