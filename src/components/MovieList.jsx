@@ -3,8 +3,9 @@ import { useState } from 'react'
 
 import Modal from './Modal'
 import RoomCreation from './RoomCreation'
+import LoadingSpinner from './LoadingSpinner'
 
-function MovieList({ movies }) {
+function MovieList({ movies, loading }) {
   const [selected, setSelected] = useState(false)
 
   function createRoom(movie) {
@@ -16,12 +17,12 @@ function MovieList({ movies }) {
     setSelected(null)
   }
 
-  // FIXME Build a real carousel
-  // FIXME add loading spinner
   return (
     <div className='carousel-component'>
-      {!movies.length ? (
-        <div>Loading...</div>
+      {!movies?.length ? (
+        <div className='loading-container'>
+          <LoadingSpinner loading={loading} />
+        </div>
       ) : (
         movies.map((movie, i) => (
           <button

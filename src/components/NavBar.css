@@ -36,6 +36,32 @@
 
     text-decoration: none;
     color: var(--color-light);
+
+    height: 100%;
+    text-align: center;
+    line-height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.main {
+      border-bottom: 4px solid var(--color-background-secondary);
+      transition: all 0.1s ease-in-out;
+
+      &:hover {
+        border-bottom: 4px solid var(--color-light);
+      }
+
+      &.active {
+        border-bottom: 4px solid var(--color-highlight);
+      }
+    }
+
+    /* no gap between Movies and Rooms */
+    &.main.movies {
+      margin-right: calc(-1rem + 1px);
+    }
   }
 
   .option-container.mobile {

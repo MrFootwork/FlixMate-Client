@@ -47,18 +47,19 @@ function App() {
       <ExtensionIndicator />
       <Message />
 
-      <Routes>
-        <Route path='/' element={<LandingPage />} />
-        <Route path='/auth' element={<AuthPage />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route path='/browse' element={<HomePage />} />
-          <Route path='/rooms' element={<RoomsListPage />} />
-          <Route path='/profile' element={<ProfilePage />} />
-          <Route path='/rooms/:roomId' element={<RoomMessengerPage />} />
-          <Route path='/test' element={<TestPage />} />
-        </Route>
-      </Routes>
-      <Message />
+      <main onClick={closeSubmenu}>
+        <Routes>
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/auth' element={<AuthPage />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path='/browse' element={<HomePage />} />
+            <Route path='/rooms' element={<RoomsListPage />} />
+            <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/rooms/:roomId' element={<RoomMessengerPage />} />
+            <Route path='/test' element={<TestPage />} />
+          </Route>
+        </Routes>
+      </main>
     </>
   )
 }

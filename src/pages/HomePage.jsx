@@ -8,33 +8,22 @@ import { SearchMovieContext } from '../contexts/SearchMovieWrapper'
 
 import MovieList from '../components/MovieList'
 import MovieCarousel from '../components/MovieCarousel'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const HomePage = () => {
-  const [movies, setMovies] = useState(null)
   const { token } = useContext(AuthContext)
-  const { movies: searchMovies, searchValue } = useContext(SearchMovieContext)
-  const [actionMovies, setActionMovies] = useState(null)
-  const [comedyBlockbusters, setComedyBlockbusters] = useState(null)
 
-  async function getActionMovies() {
-    const { data } = await axios.get(config.API_URL + '/movies/action', {
-      withCredentials: true,
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    setActionMovies(data.results)
-  }
+  // Search for Title
+  const {
+    movies: searchMovies,
+    searchValue,
+    loading: searchIsLoading,
+    isSearching,
+  } = useContext(SearchMovieContext)
 
-  async function getComedyBlockBusters() {
-    const { data } = await axios.get(
-      config.API_URL + '/movies/comedy-blockbusters',
-      {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
-    console.log(data)
-    setComedyBlockbusters(data.results)
-  }
+  // Top Picks
+  const [topPicks, setTopPicks] = useState(null)
+  const [topPicksLoading, setTopPicksLoading] = useState(true)
 
   useEffect(() => {
     axios
@@ -43,7 +32,10 @@ const HomePage = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(response => {
-        setMovies(response.data)
+        setTimeout(() => {
+          setTopPicks(response.data)
+          setTopPicksLoading(false)
+        }, 500 + Math.random() * 1000)
       })
       .catch(err => {
         console.error(err)
@@ -53,23 +45,74 @@ const HomePage = () => {
     getComedyBlockBusters()
   }, [])
 
+  // Action Movies
+  const [actionMovies, setActionMovies] = useState(null)
+  const [actionLoading, setActionLoading] = useState(true)
+
+  async function getActionMovies() {
+    const { data } = await axios.get(config.API_URL + '/movies/action', {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    })
+
+    setActionMovies(data.results)
+    setActionLoading(false)
+  }
+
+  // Block Busters
+  const [comedyBlockbusters, setComedyBlockbusters] = useState(null)
+  const [comedyLoading, setComedyLoading] = useState(true)
+
+  async function getComedyBlockBusters() {
+    const { data } = await axios.get(
+      config.API_URL + '/movies/comedy-blockbusters',
+      {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+
+    setComedyBlockbusters(data.results)
+    setComedyLoading(false)
+  }
+
   return (
     <div className='homepage-container'>
-      {searchMovies.length ? (
+      {!isSearching ? (
+        <></>
+      ) : (
         <>
           <h2>Search results for "{searchValue}"</h2>
-          <MovieList movies={searchMovies} />
+          <MovieList movies={searchMovies} isLoading={searchIsLoading} />
         </>
-      ) : (
-        <></>
       )}
+
       <h2>Top Picks</h2>
-      {movies && <MovieCarousel movies={movies} />}
-      {/* {movies && <MovieList movies={movies} />} */}
+      {topPicksLoading ? (
+        <div className='loading-container'>
+          <LoadingSpinner loading={topPicksLoading} />
+        </div>
+      ) : (
+        <MovieCarousel movies={topPicks} />
+      )}
+
       <h2>Action</h2>
-      {actionMovies && <MovieCarousel movies={actionMovies} />}
+      {actionLoading ? (
+        <div className='loading-container'>
+          <LoadingSpinner loading={actionLoading} />
+        </div>
+      ) : (
+        <MovieCarousel movies={actionMovies} />
+      )}
+
       <h2>Comedy Blockbusters</h2>
-      {comedyBlockbusters && <MovieCarousel movies={comedyBlockbusters} />}
+      {comedyLoading ? (
+        <div className='loading-container'>
+          <LoadingSpinner loading={comedyLoading} />
+        </div>
+      ) : (
+        <MovieCarousel movies={comedyBlockbusters} />
+      )}
     </div>
   )
 }

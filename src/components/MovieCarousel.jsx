@@ -12,17 +12,17 @@ const responsive = {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
     items: 10,
-    slidesToSlide: 2,
+    slidesToSlide: 3,
   },
   largeDesktop: {
     breakpoint: { max: 3000, min: 1500 },
     items: 6,
-    slidesToSlide: 2,
+    slidesToSlide: 3,
   },
   desktop: {
     breakpoint: { max: 1500, min: 1024 },
     items: 5,
-    slidesToSlide: 2,
+    slidesToSlide: 3,
   },
   four: {
     breakpoint: { max: 1024, min: 850 },
@@ -60,7 +60,7 @@ function MovieCarousel({ movies }) {
 
   return (
     <div className='Carousel'>
-      <Carousel responsive={responsive}>
+      <Carousel responsive={responsive} swipeable={true} centerMode={true}>
         {movies &&
           movies.map((movie, i) => (
             <button

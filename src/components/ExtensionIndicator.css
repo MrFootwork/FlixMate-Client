@@ -19,24 +19,26 @@
     transition: inherit;
   }
 
-  &:hover img {
-    filter: invert(2);
-  }
-
   .background {
     position: absolute;
-    top: calc(var(--width) / 2);
-    left: calc(var(--width) / 2);
+    top: calc(var(--width) / 2 - 1vh);
+    left: calc(var(--width) / 2 - 0.5vw);
 
     width: 1px;
     aspect-ratio: 1;
 
-    border-radius: 50%;
+    border-radius: 100%;
     background-color: var(--color-highlight);
     transition: inherit;
   }
 
-  &:hover .background {
-    transform: scale(50);
+  &:hover {
+    img {
+      filter: invert(2);
+    }
+
+    .background {
+      transform: scale(40);
+    }
   }
 }

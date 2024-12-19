@@ -12,13 +12,24 @@ const API_URL = config.API_URL
 function SearchMovieWrapper({ children }) {
   const { token } = useContext(AuthContext)
   const { search } = useLocation()
+
   const [movies, setMovies] = useState([])
   const [searchValue, setSearchValue] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [isSearching, setIsSearching] = useState(false)
+
+  useEffect(() => {
+    const searchIsValid = searchValue && searchValue !== ''
+    const fetchedOnce = movies?.length
+
+    if (searchIsValid || fetchedOnce) setIsSearching(true)
+  }, [movies, searchValue])
 
   useEffect(() => {
     async function searchMovies() {
       const searchParams = new URLSearchParams(search)
       const searchValue = searchParams.get('search') || ''
+
       setSearchValue(searchValue)
 
       try {
@@ -29,16 +40,20 @@ function SearchMovieWrapper({ children }) {
         setMovies(data)
       } catch (error) {
         console.error(error)
+      } finally {
+        setLoading(false)
       }
     }
 
-    if (search) searchMovies()
+    if (search && token) searchMovies()
 
     return () => {}
-  }, [search])
+  }, [search, token])
 
   return (
-    <SearchMovieContext.Provider value={{ movies, searchValue }}>
+    <SearchMovieContext.Provider
+      value={{ isSearching, loading, movies, searchValue }}
+    >
       {children}
     </SearchMovieContext.Provider>
   )

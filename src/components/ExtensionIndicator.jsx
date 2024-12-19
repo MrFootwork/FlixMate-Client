@@ -13,9 +13,11 @@ function ExtensionIndicator() {
     setFirstSlug(pathname.split('/')[1] || '')
   }, [pathname])
 
+  // Installation Guide
+  const [guideIsOpen, setGuideIsOpen] = useState(false)
+
   function openInstallationGuide() {
-    // FIXME use the modal wrapper to show installation guide
-    console.log('Opening installation guide...')
+    setGuideIsOpen(true)
   }
 
   return (

@@ -110,8 +110,12 @@ function NavBar({
         {!isMobile && (
           <>
             {/* FIXME apply NavLink styles */}
-            <NavLink to='/browse'>Movies</NavLink>
-            <NavLink to='/rooms'>Rooms</NavLink>
+            <NavLink to='/browse' className='main movies'>
+              Movies
+            </NavLink>
+            <NavLink to='/rooms' className='main'>
+              Rooms
+            </NavLink>
             <DarkModeSwitch
               // style={{ marginBottom: '2rem' }}
               checked={isDarkMode}
