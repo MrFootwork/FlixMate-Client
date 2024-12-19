@@ -14,6 +14,8 @@
   z-index: var(--z-navbar);
   transition: all 0.1s ease-in-out;
 
+  outline: none;
+
   img {
     transform: translateX(2px);
     transition: inherit;

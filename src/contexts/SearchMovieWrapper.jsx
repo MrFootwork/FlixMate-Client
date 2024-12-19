@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 import config from '../../config'
