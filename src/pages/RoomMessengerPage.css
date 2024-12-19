@@ -3,11 +3,13 @@
   overflow: hidden;
 
   display: flex;
+  justify-content: center;
   position: relative;
 
   .messages-container {
     overflow-y: scroll;
     width: 100%;
+    max-width: 800px;
 
     display: flex;
     flex-direction: column;
@@ -28,20 +30,40 @@
     display: flex;
     flex-direction: row;
 
+    --z-messenger-input: 600;
+    --z-messenger-button: 500;
+
     input {
-      padding: 1rem;
+      padding: 1.5rem 3rem;
+      z-index: var(--z-messenger-input);
 
       width: inherit;
       margin-top: 0.3rem;
       font-size: var(--font-size-m);
 
-      border-radius: var(--border-round-s);
+      border-radius: 50px;
       border: none;
-      background-color: var(--color-light);
+      background-color: var(--color-messenger-card-right);
+      color: hsl(from var(--color-background-secondary) h s calc(l + 45));
 
       &:disabled {
         color: hsl(from var(--color-background-secondary) h s calc(l + 15));
       }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    button {
+      z-index: var(--z-messenger-button);
+      height: 100%;
+      aspect-ratio: 1;
+      border-radius: 50px;
+
+      color: var(--color-text);
+      background-color: var(--color-background);
+      border: 2px solid var(--color-messenger-card-right);
     }
   }
 

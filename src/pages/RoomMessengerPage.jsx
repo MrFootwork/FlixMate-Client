@@ -93,8 +93,9 @@ function RoomMessengerPage() {
   }, [messages])
 
   return (
+    // FIXME use grid instead
     <div className='messenger-page-container'>
-      <aside className='room-nav-sidebar'>
+      {/* <aside className='room-nav-sidebar'>
         <header>Rooms</header>
         <nav>
           <ul>
@@ -102,10 +103,10 @@ function RoomMessengerPage() {
             <li>Room 2</li>
           </ul>
         </nav>
-      </aside>
+      </aside> */}
 
-      <section className='messages-container'>
-        <section className='messages-history-container'>
+      <div className='messages-container'>
+        <div className='messages-history-container'>
           {messages &&
             messages.map((message, i) => (
               <MessengerMessageCard
@@ -115,15 +116,15 @@ function RoomMessengerPage() {
               />
             ))}
           <div ref={bottomRef}></div>
-        </section>
+        </div>
 
-        <section className='messages-input-container'>
+        <div className='messages-input-container'>
           <input type='text' ref={inputRef} placeholder='Type a message' />
-          <button onClick={sendMessage}>Click Me</button>
-        </section>
-      </section>
+          <button onClick={sendMessage}>Send</button>
+        </div>
+      </div>
 
-      <aside>
+      {/* <aside>
         <header>
           <div>
             <img src='' alt='Room Image' />
@@ -140,7 +141,7 @@ function RoomMessengerPage() {
             <li>Member 2</li>
           </ul>
         </section>
-      </aside>
+      </aside> */}
     </div>
   )
 }

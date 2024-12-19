@@ -99,7 +99,7 @@ input {
   font-size: var(--font-size-m);
 }
 
-/* Scrollbar */
+/* SCROLLBAR */
 :root {
   --handle: var(--color-background-secondary-off-2);
   --handle-hover: var(--color-background-secondary-off);
