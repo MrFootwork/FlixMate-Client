@@ -13,6 +13,28 @@ const HomePage = () => {
   const [movies, setMovies] = useState(null)
   const { token } = useContext(AuthContext)
   const { movies: searchMovies, searchValue } = useContext(SearchMovieContext)
+  const [actionMovies, setActionMovies] = useState(null)
+  const [comedyBlockbusters, setComedyBlockbusters] = useState(null)
+
+  async function getActionMovies() {
+    const { data } = await axios.get(config.API_URL + '/movies/action', {
+      withCredentials: true,
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    setActionMovies(data.results)
+  }
+
+  async function getComedyBlockBusters() {
+    const { data } = await axios.get(
+      config.API_URL + '/movies/comedy-blockbusters',
+      {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    console.log(data)
+    setComedyBlockbusters(data.results)
+  }
 
   useEffect(() => {
     axios
@@ -26,6 +48,9 @@ const HomePage = () => {
       .catch(err => {
         console.error(err)
       })
+
+    getActionMovies()
+    getComedyBlockBusters()
   }, [])
 
   return (
@@ -41,6 +66,10 @@ const HomePage = () => {
       <h2>Top Picks</h2>
       {movies && <MovieCarousel movies={movies} />}
       {/* {movies && <MovieList movies={movies} />} */}
+      <h2>Action</h2>
+      {actionMovies && <MovieCarousel movies={actionMovies} />}
+      <h2>Comedy Blockbusters</h2>
+      {comedyBlockbusters && <MovieCarousel movies={comedyBlockbusters} />}
     </div>
   )
 }

@@ -23,7 +23,7 @@ const RoomCard = ({ room }) => {
   if (!movie) return null
   return (
     <tr className='RoomCard'>
-      <td className='details'>
+      <td className={`details ${expanded ? 'expanded' : 'closed'}`}>
         <p>{name}</p>
         <p>{owner.name}</p>
         <p className='show'>{movie.title}</p>
