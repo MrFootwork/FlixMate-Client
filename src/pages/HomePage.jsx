@@ -123,3 +123,4 @@ export default HomePage
 // Extension Icon: <a href="https://www.flaticon.com/free-icons/puzzle" title="puzzle icons">Puzzle icons created by Google - Flaticon</a>
 // Profile Image: <a href="https://www.flaticon.com/free-icons/female" title="female icons">Female icons created by Prosymbols Premium - Flaticon</a>
 // FM Logo: <a href="https://www.flaticon.com/free-icons/fm-tuner" title="fm tuner icons">Fm tuner icons created by Freepik - Flaticon</a>
+// Participants Icon: <a target="_blank" href="https://icons8.com/icon/VlSPAotgzcER/conference-foreground-selected">Conference Foreground Selected</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>

@@ -126,7 +126,7 @@ function RoomMessengerPage() {
               <MessengerMessageCard
                 key={message._id}
                 message={message}
-                nextMessage={messages[i + 1]}
+                nextMessage={messages[i + 1] || null}
               />
             ))}
           <div ref={bottomRef}></div>

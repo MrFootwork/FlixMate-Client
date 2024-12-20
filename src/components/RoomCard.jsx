@@ -2,6 +2,10 @@ import { useNavigate } from 'react-router-dom'
 import './RoomCard.css'
 import { useState } from 'react'
 
+import enterRoom from '../assets/images/enter-room.png'
+import chatIcon from '../assets/images/chat-icon.png'
+import participantsIcon from '../assets/images/participants.png'
+
 const RoomCard = ({ room }) => {
   const { name, owner, participants, movie } = room
   const [expanded, setExpanded] = useState(false)
@@ -28,10 +32,18 @@ const RoomCard = ({ room }) => {
         <p>{owner.name}</p>
         <p className='show'>{movie.title}</p>
         <p className='participants-number'>{participants.length}</p>
-        <button onClick={handleJoin}>Join</button>
-        <button onClick={handleChat}>Chat</button>
+        <button onClick={handleJoin}>
+          <img className='enter-room' src={enterRoom} alt='Enter room' />
+        </button>
+        <button onClick={handleChat}>
+          <img className='join-chat' src={chatIcon} alt='Join Chat' />
+        </button>
         <button className='expand' onClick={handleExpand}>
-          {expanded ? 'X' : 'V'}
+          <img
+            className='participants'
+            src={participantsIcon}
+            alt='Show Participants'
+          />
         </button>
       </td>
       {expanded ? (

@@ -42,6 +42,41 @@
     p.participants-number {
       flex: 2;
     }
+
+    button {
+      img {
+        filter: invert(0.95);
+      }
+    }
+
+    button:has(.enter-room) {
+      overflow: hidden;
+
+      .enter-room {
+        object-fit: cover;
+        width: 1.6rem;
+      }
+    }
+
+    button:has(.join-chat) {
+      overflow: hidden;
+
+      .join-chat {
+        object-fit: cover;
+        width: 2rem;
+      }
+    }
+
+    button:has(.participants) {
+      overflow: hidden;
+
+      .participants {
+        object-fit: cover;
+        width: 1.8rem;
+        border: none;
+        margin-top: 0.5vh;
+      }
+    }
   }
 
   /* .expanded {
