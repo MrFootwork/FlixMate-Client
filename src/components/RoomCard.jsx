@@ -28,6 +28,7 @@ const RoomCard = ({ room }) => {
   return (
     <tr className='RoomCard'>
       <td className={`details ${expanded ? 'expanded' : 'closed'}`}>
+        {/* FIXME hook.js:608 Warning: validateDOMNesting(...): Text nodes cannot appear as a child of <tbody>. Error Component Stack */}
         <p>{name}</p>
         <p>{owner.name}</p>
         <p className='show'>{movie.title}</p>

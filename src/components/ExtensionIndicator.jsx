@@ -4,6 +4,9 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import { ThemeContext } from '../contexts/ThemeWrapper'
 
+import Modal from './Modal'
+import InstallationGuide from '../pages/InstallationGuide'
+
 function ExtensionIndicator() {
   const { pathname } = useLocation()
   const [firstSlug, setFirstSlug] = useState('')
@@ -17,6 +20,7 @@ function ExtensionIndicator() {
   const [guideIsOpen, setGuideIsOpen] = useState(false)
 
   function openInstallationGuide() {
+    console.log('OPENING INSTALLATION GUIDE')
     setGuideIsOpen(true)
   }
 
@@ -38,6 +42,9 @@ function ExtensionIndicator() {
           />
         </button>
       )}
+      <Modal isOpen={guideIsOpen} close={() => setGuideIsOpen(false)}>
+        <InstallationGuide />
+      </Modal>
     </>
   )
 }
