@@ -43,8 +43,10 @@ function InstallationGuide() {
       <h2>🚀 FlixMate Setup Made Easy: Your Guide to Get Started 🎉🍿</h2>
       <ol>
         <li>
-          🚀 First, download the FlixMate Extension by clicking this button 👉{' '}
-          <button onClick={downloadExtension}>FlixMate Extension ⬇️</button>
+          🚀 First, download the FlixMate Extension by clicking here 👉{' '}
+          <a href='/FlixMate-Extension.zip' download>
+            FlixMate Extension ⬇️
+          </a>
         </li>
         <li>
           📂 Next, open your Downloads folder and find the file called
