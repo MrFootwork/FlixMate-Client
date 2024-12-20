@@ -2,6 +2,8 @@ import axios from 'axios'
 import React from 'react'
 import config from '../../config'
 
+import './InstallationGuide.css'
+
 function InstallationGuide() {
   function downloadExtension() {
     axios
@@ -37,7 +39,8 @@ function InstallationGuide() {
   }
 
   return (
-    <div>
+    <div className='installation-guide'>
+      <h2>🚀 FlixMate Setup Made Easy: Your Guide to Get Started 🎉🍿</h2>
       <ol>
         <li>
           🚀 First, download the FlixMate Extension by clicking this button 👉{' '}

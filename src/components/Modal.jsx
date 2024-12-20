@@ -25,7 +25,7 @@ const modalStyle = {
   },
 }
 
-function Modal({ children, isOpen, close }) {
+function Modal({ children, isOpen, close, cssOverwrite }) {
   return (
     <div>
       {/* BUG hook.js:608 Warning: react-modal: App element is not defined. Please use `Modal.setAppElement(el)` or set `appElement={el}`.  */}
@@ -33,8 +33,11 @@ function Modal({ children, isOpen, close }) {
         isOpen={Boolean(isOpen)}
         shouldCloseOnEsc={true}
         onRequestClose={close}
-        style={modalStyle}
-        className='modal-container'
+        style={{
+          ...modalStyle,
+          content: { ...modalStyle.content, ...cssOverwrite },
+        }}
+        className={`modal-container`}
       >
         {isOpen && children}
       </ReactModal>

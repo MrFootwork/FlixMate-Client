@@ -42,7 +42,11 @@ function ExtensionIndicator() {
           />
         </button>
       )}
-      <Modal isOpen={guideIsOpen} close={() => setGuideIsOpen(false)}>
+      <Modal
+        isOpen={guideIsOpen}
+        close={() => setGuideIsOpen(false)}
+        cssOverwrite={{ maxWidth: '70vw', maxHeight: '90vh', margin: '0 auto' }}
+      >
         <InstallationGuide />
       </Modal>
     </>
