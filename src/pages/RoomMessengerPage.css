@@ -45,10 +45,10 @@
       border-radius: 50px;
       border: none;
       background-color: var(--color-messenger-card-right);
-      color: hsl(from var(--color-background-secondary) h s calc(l + 45));
+      color: var(--color-text);
 
       &:disabled {
-        color: hsl(from var(--color-background-secondary) h s calc(l + 15));
+        color: hsl(from var(--color-background-secondary) h s calc(l + 30));
       }
 
       &:focus-visible {
